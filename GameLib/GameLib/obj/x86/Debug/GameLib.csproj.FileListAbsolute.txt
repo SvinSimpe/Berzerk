@@ -1,0 +1,12 @@
+c:\users\sebastian\documents\visual studio 2012\Projects\GameLib\GameLib\bin\x86\Debug\GameLib.dll
+c:\users\sebastian\documents\visual studio 2012\Projects\GameLib\GameLib\bin\x86\Debug\GameLib.pdb
+c:\users\sebastian\documents\visual studio 2012\Projects\GameLib\GameLib\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\sebastian\documents\visual studio 2012\Projects\GameLib\GameLib\obj\x86\Debug\GameLib.dll
+c:\users\sebastian\documents\visual studio 2012\Projects\GameLib\GameLib\obj\x86\Debug\GameLib.pdb
+C:\Users\Sebastian\Documents\Visual Studio 2012\Projects\GameLib\GameLib\obj\x86\Debug\GameLib.csprojResolveAssemblyReference.cache
+C:\Users\Sebastian\Documents\Visual Studio 2012\Projects\Berzerk\GameLib\GameLib\bin\x86\Debug\GameLib.dll
+C:\Users\Sebastian\Documents\Visual Studio 2012\Projects\Berzerk\GameLib\GameLib\bin\x86\Debug\GameLib.pdb
+C:\Users\Sebastian\Documents\Visual Studio 2012\Projects\Berzerk\GameLib\GameLib\obj\x86\Debug\GameLib.csprojResolveAssemblyReference.cache
+C:\Users\Sebastian\Documents\Visual Studio 2012\Projects\Berzerk\GameLib\GameLib\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Sebastian\Documents\Visual Studio 2012\Projects\Berzerk\GameLib\GameLib\obj\x86\Debug\GameLib.dll
+C:\Users\Sebastian\Documents\Visual Studio 2012\Projects\Berzerk\GameLib\GameLib\obj\x86\Debug\GameLib.pdb

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Berzerk", "Berzerk\Berzerk\Berzerk.csproj", "{33264778-CA19-4621-912D-01F438059F3C}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BerzerkContent", "Berzerk\BerzerkContent\BerzerkContent.contentproj", "{43014EF7-8356-44AE-8624-D7017502D498}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerzerkContent", "Berzerk\BerzerkContent\BerzerkContent.contentproj", "{43014EF7-8356-44AE-8624-D7017502D498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLib", "..\GameLib\GameLib\GameLib.csproj", "{CB13E11B-B358-4437-B89C-068DEB5836F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLib", "GameLib\GameLib\GameLib.csproj", "{CB13E11B-B358-4437-B89C-068DEB5836F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
