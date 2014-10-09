@@ -1,0 +1,7 @@
+Content\Graphics\Backgrounds\back1.xnb
+Content\Graphics\Backgrounds\back2.xnb
+Content\Graphics\Backgrounds\back3.xnb
+Content\Graphics\Backgrounds\back4.xnb
+Content\Graphics\BatterHit.xnb
+Content\Graphics\BatterIdle.xnb
+Content\Graphics\Backgrounds\Plateau.xnb

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Graphics\Backgrounds\back1.png</Source>
+      <Name>Graphics\Backgrounds\back1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back1.xnb</Output>
+      <Time>2014-10-03T12:24:05.2553704+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Backgrounds\back2.png</Source>
+      <Name>Graphics\Backgrounds\back2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back2.xnb</Output>
+      <Time>2014-10-03T12:24:05.2925333+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Backgrounds\back3.png</Source>
+      <Name>Graphics\Backgrounds\back3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back3.xnb</Output>
+      <Time>2014-10-03T12:24:05.3158436+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Backgrounds\back4.png</Source>
+      <Name>Graphics\Backgrounds\back4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back4.xnb</Output>
+      <Time>2014-10-03T12:24:05.3420243+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\BatterHit.png</Source>
+      <Name>Graphics\BatterHit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\BatterHit.xnb</Output>
+      <Time>2014-10-04T19:51:59.9593757+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\BatterIdle.png</Source>
+      <Name>Graphics\BatterIdle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\BatterIdle.xnb</Output>
+      <Time>2014-10-04T19:51:59.9593757+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Backgrounds\Plateau.png</Source>
+      <Name>Graphics\Backgrounds\Plateau</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\Plateau.xnb</Output>
+      <Time>2014-10-04T19:59:31.8667023+02:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{43014EF7-8356-44AE-8624-D7017502D498}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\BerzerkContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2014-09-30T18:05:21.5592111+02:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

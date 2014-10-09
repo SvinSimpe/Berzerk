@@ -1,0 +1,15 @@
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Berzerk.exe
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Berzerk.pdb
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\GameLib.dll
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\GameLib.pdb
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\obj\x86\Debug\Berzerk.csprojResolveAssemblyReference.cache
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\obj\x86\Debug\Berzerk.exe
+c:\users\sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\obj\x86\Debug\Berzerk.pdb
+C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back1.xnb
+C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back2.xnb
+C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back3.xnb
+C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\back4.xnb
+C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\BatterHit.xnb
+C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\BatterIdle.xnb
+C:\Users\Sebastian\documents\visual studio 2012\Projects\Berzerk\Berzerk\Berzerk\bin\x86\Debug\Content\Graphics\Backgrounds\Plateau.xnb
