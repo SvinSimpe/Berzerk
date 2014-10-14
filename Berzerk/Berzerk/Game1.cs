@@ -32,7 +32,7 @@ namespace Berzerk
         protected override void Initialize()
         {
             //Test level
-            test = new TestGame();
+            test = new TestGame(this.GraphicsDevice);
             base.Initialize();
         }
 
@@ -66,14 +66,14 @@ namespace Berzerk
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
 
             //Test level
             test.Draw(spriteBatch);
 
-            spriteBatch.End();
+           // spriteBatch.End();
 
             base.Draw(gameTime);
         }

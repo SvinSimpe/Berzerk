@@ -15,6 +15,9 @@ namespace Berzerk
     public class TestGame
     {
         ContentManager content;
+        GraphicsDevice graphics;
+        Camera2D camera;
+        Vector2 cameraPosition;
 
         AnimatedTexture batter;
         float rotation = 0.0f;
@@ -31,9 +34,12 @@ namespace Berzerk
         ScrollingBackground plateau;
         int velocity;
 
-        public TestGame()
+        public TestGame(GraphicsDevice graphics)
         {
+            this.graphics = graphics;
             batter = new AnimatedTexture(Vector2.Zero, rotation, scale, depth);
+            camera = new Camera2D(graphics.Viewport);
+            cameraPosition = new Vector2(graphics.Viewport.Width / 2, 0);
         }
 
         public void LoadContent(ContentManager content)
@@ -93,6 +99,8 @@ namespace Berzerk
                 plateau.Reset();
                 batterPos.X = 100;
                 velocity = 0;
+                cameraPosition.X = graphics.Viewport.Width / 2;
+                cameraPosition.Y = 0;
             }
 
             if (back1.rectangle.X + back1.texture.Width <= 0)
@@ -111,10 +119,28 @@ namespace Berzerk
             if( plateau.rectangle.X + plateau.texture.Width > 0 )
                 plateau.Update(velocity);
             /////////////////////////////////////////////////////////////////
+
+            ///////////////////////////// CAMERA ////////////////////////////
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                cameraPosition.Y--;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                cameraPosition.Y++;
+            }
+
+            if (cameraPosition.Y >= 0)
+                cameraPosition.Y = 0;
+
+            camera.Update(gameTime, cameraPosition);
+            /////////////////////////////////////////////////////////////////
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transforms);
+            
             // BACKGROUND
             back1.Draw(spriteBatch);
             back2.Draw(spriteBatch);
@@ -124,6 +150,8 @@ namespace Berzerk
 
             // BATTER
             batter.DrawFrame(spriteBatch, batterPos);
+
+            spriteBatch.End();
         }
     }
 }
