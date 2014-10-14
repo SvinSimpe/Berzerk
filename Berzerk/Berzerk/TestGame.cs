@@ -53,6 +53,9 @@ namespace Berzerk
         Mine m_mine;
         //========= MINE TEST =============
 
+        //========= POWER UP TEST =============
+        PowerUp m_powerUp;
+        //========= POWER UP TEST =============
 
 
 
@@ -95,6 +98,10 @@ namespace Berzerk
 
             //========= MINE TEST =============
             m_mine = new Mine(new Vector2(700, 680), content);
+            //========= MINE TEST =============
+
+            //========= MINE TEST =============
+            m_powerUp = new PowerUp(new Vector2(900, 350), content);
             //========= MINE TEST =============
         }
 
@@ -222,11 +229,22 @@ namespace Berzerk
                 m_projectile.ApplyForce3();
 
             ///////////////////////////   MINE   ///////////////////////////
-            m_slime.Update(gameTime);
+            m_mine.Update(gameTime);
 
             //Check collision with mine
             if (m_projectile.BoundingBox.Intersects(m_mine.BoundingBox))
                 m_projectile.ApplyForce4();
+
+            ///////////////////////////   POWER UP   ///////////////////////////
+            m_powerUp.Update(gameTime);
+
+            //Check collision with mine
+            if (m_projectile.BoundingBox.Intersects(m_powerUp.BoundingBox))
+            {
+                //Player receivs XP-reward from Power Up
+                //...
+                m_powerUp.IsTaken = true;
+            }
 
         }
 
@@ -255,6 +273,9 @@ namespace Berzerk
 
             // SLIME
             m_mine.Draw(spriteBatch);
+
+            // POWER UP
+            m_powerUp.Draw(spriteBatch);
 
             spriteBatch.End();
 
