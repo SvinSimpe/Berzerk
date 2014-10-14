@@ -13,10 +13,9 @@ namespace Berzerk
     {
         #region Fields & Properties
 
-        //private Vector2     m_position;
-        //private Texture2D   m_texture;
         private float       m_angle;    // The inital angle of the projectile
         private float       m_speed;
+        private float       m_xPosition;    // Speed of scrolling backgrounds
         private float       m_xVelocity;
         private float       m_yVelocity;
         private float       m_time;     // The lifetime of the projectiles, increments each loop
@@ -35,6 +34,24 @@ namespace Berzerk
         {
             get { return m_texture; }
             set { m_texture = value; }
+        }
+
+        public float XVelocity
+        {
+            get { return m_xVelocity; }
+            set { m_xVelocity = value; }
+        }
+
+        public float XPosition
+        {
+            get { return m_xPosition; }
+            set { m_xPosition = value; }
+        }
+
+        public float YVelocity
+        {
+            get { return m_yVelocity; }
+            set { m_yVelocity = value; }
         }
 
         public bool Flying
@@ -75,7 +92,7 @@ namespace Berzerk
             :base( content.Load<Texture2D>("Graphics/projectile0"), startPosition )
         {
             m_angle     = MathHelper.ToRadians( 45 );
-            m_speed     = 40.0f;
+            m_speed     = 80.0f;
             m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
             m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
             m_time      = 0.0f;
@@ -128,7 +145,7 @@ namespace Berzerk
                 millisecs /= 10000;
                 m_time += millisecs;
 
-                m_position.X += m_xVelocity;
+                m_xPosition += m_xVelocity;
                 m_position.Y -= ( m_yVelocity ) - (gravity * m_time * m_time );
             }                
         }

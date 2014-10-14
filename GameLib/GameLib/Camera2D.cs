@@ -18,9 +18,9 @@ namespace GameLib
             this.view = view;
         }
 
-        public void Update(GameTime gameTime, Vector2 objectPosition)
+        public void Update(GameTime gameTime, float objectY)
         {
-            center = new Vector2(view.X / 2, objectPosition.Y);
+            center = new Vector2(view.X / 2, objectY);
             transforms = Matrix.CreateScale(new Vector3(1, 1, 0)) *
                          Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0));
         }
