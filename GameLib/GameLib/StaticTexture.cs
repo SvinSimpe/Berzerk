@@ -32,7 +32,7 @@ namespace GameLib
         void Update(GameTime gameTime)
         { }
 
-        void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(m_texture, m_position, Color.White);
         }
