@@ -46,6 +46,12 @@ namespace Berzerk
         Wasp m_wasp;
         //========= WASP TEST =============
 
+        //========= SLIME TEST =============
+        Slime m_slime;
+        //========= SLIME TEST =============
+
+
+
 
 
 
@@ -79,6 +85,10 @@ namespace Berzerk
             //========= PROJECTILE TEST =============
             m_wasp = new Wasp( new Vector2(700, 400), content );
             //========= PROJECTILE TEST =============
+
+            //========= SLIME TEST =============
+            m_slime = new Slime(new Vector2(1000, 650), content);
+            //========= SLIME TEST =============
         }
 
         public void Update(GameTime gameTime)
@@ -181,8 +191,14 @@ namespace Berzerk
             m_wasp.Update( gameTime );
 
             //Check collision with wasp
-            if (m_projectile.BoundingBox.Intersects( m_wasp.BoundingBox ) )
-                m_projectile.ApplyForce2();
+            //if (m_projectile.BoundingBox.Intersects( m_wasp.BoundingBox ) )
+            //    m_projectile.ApplyForce2();
+
+            ///////////////////////////   SLIME   ///////////////////////////
+            m_slime.Update( gameTime );
+            if (m_projectile.BoundingBox.Intersects(m_slime.BoundingBox))
+                m_projectile.ApplyForce3();
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -204,6 +220,9 @@ namespace Berzerk
 
             // WASP
             m_wasp.Draw( spriteBatch );
+
+            // SLIME
+            m_slime.Draw(spriteBatch);
 
             spriteBatch.End();
         }
