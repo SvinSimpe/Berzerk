@@ -9,24 +9,24 @@ namespace GameLib
 {
     class StaticTexture
     {
-        Texture2D texture;
-        Vector2 position;
+        Texture2D m_texture;
+        Vector2 m_position;
 
         public Texture2D Texture
         {
-            get { return texture; }
+            get { return m_texture; }
         }
 
         public Vector2 Position
         {
-            get { return position; }
-            set { position = value; }
+            get { return m_position; }
+            set { m_position = value; }
         }
 
         public StaticTexture( Texture2D texture, Vector2 position)
         {
-            this.texture = texture;
-            this.position = position;
+            m_texture = texture;
+            m_position = position;
         }
 
         void Update(GameTime gameTime)
@@ -34,7 +34,7 @@ namespace GameLib
 
         void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(m_texture, m_position, Color.White);
         }
         
     }
