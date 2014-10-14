@@ -42,6 +42,12 @@ namespace Berzerk
         //========= PROJECTILE TEST =============
 
 
+        //========= WASP TEST =============
+        Wasp m_wasp;
+        //========= WASP TEST =============
+
+
+
 
         public TestGame(GraphicsDevice graphics)
         {
@@ -68,6 +74,10 @@ namespace Berzerk
 
             //========= PROJECTILE TEST =============
             m_projectile = new Projectile(new Vector2(0, 512), content);
+            //========= PROJECTILE TEST =============
+
+            //========= PROJECTILE TEST =============
+            m_wasp = new Wasp( new Vector2(700, 400), content );
             //========= PROJECTILE TEST =============
         }
 
@@ -166,6 +176,13 @@ namespace Berzerk
                     m_projectile.ApplyForce1();
                 }
             }
+
+            ///////////////////////////   WASP   ///////////////////////////
+            m_wasp.Update( gameTime );
+
+            //Check collision with wasp
+            if (m_projectile.BoundingBox.Intersects( m_wasp.BoundingBox ) )
+                m_projectile.ApplyForce2();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -184,6 +201,9 @@ namespace Berzerk
 
             // PROJECTILE
             m_projectile.Draw(spriteBatch);
+
+            // WASP
+            m_wasp.Draw( spriteBatch );
 
             spriteBatch.End();
         }
