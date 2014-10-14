@@ -7,10 +7,10 @@ using System.Text;
 
 namespace GameLib
 {
-    class StaticTexture
+    public class StaticTexture
     {
-        Texture2D m_texture;
-        Vector2 m_position;
+        public Texture2D m_texture;
+        public Vector2 m_position;
 
         public Texture2D Texture
         {

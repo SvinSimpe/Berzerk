@@ -13,8 +13,8 @@ namespace Berzerk
     {
         #region Fields & Properties
 
-        private Vector2     m_position;
-        private Texture2D   m_texture;
+        //private Vector2     m_position;
+        //private Texture2D   m_texture;
         private float       m_angle;    // The inital angle of the projectile
         private float       m_speed;
         private float       m_xVelocity;
@@ -72,7 +72,7 @@ namespace Berzerk
 	    }
 
         public Projectile( Vector2 startPosition, ContentManager content )
-            :base( content.Load<Texture2D>("Graphics/Projectile/projectile0"), startPosition )
+            :base( content.Load<Texture2D>("Graphics/projectile0"), startPosition )
         {
             m_angle     = MathHelper.ToRadians( 45 );
             m_speed     = 40.0f;
