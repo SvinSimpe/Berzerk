@@ -81,7 +81,8 @@ namespace Berzerk
             this.content = content;
 
             //========= PROJECTILE TEST =============
-            m_projectile = new Projectile(new Vector2(0, 512), content);
+            Vector2 projectilePosition = new Vector2(graphics.Viewport.Width / 2, 512);
+            m_projectile = new Projectile(projectilePosition, content);
             //========= PROJECTILE TEST =============
 
             //========= PROJECTILE TEST =============
@@ -152,12 +153,22 @@ namespace Berzerk
             if (back4.rectangle.X + back4.texture.Width <= 0)
                 back4.rectangle.X = back3.rectangle.X + back3.texture.Width;
 
-            back1.Update(velocity);
-            back2.Update(velocity);
-            back3.Update(velocity);
-            back4.Update(velocity);
-            if( plateau.rectangle.X + plateau.texture.Width > 0 )
-                plateau.Update(velocity);
+            if (m_projectile.Flying)
+            {
+                back1.Update((int)m_projectile.XVelocity);
+                back2.Update((int)m_projectile.XVelocity);
+                back3.Update((int)m_projectile.XVelocity);
+                back4.Update((int)m_projectile.XVelocity);
+                if (plateau.rectangle.X + plateau.texture.Width > 0)
+                    plateau.Update((int)m_projectile.XVelocity);
+            }
+
+            //back1.Update(velocity);
+            //back2.Update(velocity);
+            //back3.Update(velocity);
+            //back4.Update(velocity);
+            //if( plateau.rectangle.X + plateau.texture.Width > 0 )
+            //    plateau.Update(velocity);
             /////////////////////////////////////////////////////////////////
 
             ///////////////////////////// CAMERA ////////////////////////////
@@ -170,10 +181,12 @@ namespace Berzerk
                 cameraPosition.Y++;
             }
 
-            if (cameraPosition.Y >= 0)
-                cameraPosition.Y = 0;
-
-            camera.Update(gameTime, cameraPosition);
+            if (m_projectile.Position.Y >= 0)
+            {
+                camera.Update(gameTime, 0);
+            }
+            else
+                camera.Update(gameTime, m_projectile.Position.Y);
             /////////////////////////////////////////////////////////////////
 
             ///////////////////////////   PROJECTILE   ///////////////////////////
@@ -244,6 +257,7 @@ namespace Berzerk
             m_mine.Draw(spriteBatch);
 
             spriteBatch.End();
+
         }
     }
 }
