@@ -24,6 +24,8 @@ namespace Berzerk
         int frames = 2;
         int framesPerSec = 3;
 
+        Rectangle groundRect = new Rectangle(0, 712, 1280, 7);  /// Checks intersection with projectile
+
         ScrollingBackground back1;
         ScrollingBackground back2;
         ScrollingBackground back3;
@@ -31,16 +33,22 @@ namespace Berzerk
         ScrollingBackground plateau;
         int velocity;
 
+        //========= PROJECTILE TEST =============
+        Projectile m_projectile;
+        int m_groundHitCounter = 0;
+        //========= PROJECTILE TEST =============
+
         public TestGame()
         {
             batter = new AnimatedTexture(Vector2.Zero, rotation, scale, depth);
+            
         }
 
         public void LoadContent(ContentManager content)
         {
             batter.Load(content, "Graphics/BatterIdle", frames, framesPerSec);
             batterPos = new Vector2(100, 240);
-
+            
             back1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back1"), new Rectangle(0, 0, 640, 720));
             back2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back2"), new Rectangle(640, 0, 640, 720));
             back3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back3"), new Rectangle(1280, 0, 640, 720));
@@ -49,6 +57,10 @@ namespace Berzerk
             velocity = 0;
 
             this.content = content;
+
+            //========= PROJECTILE TEST =============
+            m_projectile = new Projectile(new Vector2(0, 512), content);
+            //========= PROJECTILE TEST =============
         }
 
         public void Update(GameTime gameTime)
@@ -111,6 +123,24 @@ namespace Berzerk
             if( plateau.rectangle.X + plateau.texture.Width > 0 )
                 plateau.Update(velocity);
             /////////////////////////////////////////////////////////////////
+
+            ///////////////////////////   PROJECTILE   ///////////////////////////
+            m_projectile.Update(gameTime);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                m_projectile.Flying = true;
+            }
+
+            if (m_projectile.Flying)
+            {
+                if (groundRect.Intersects(m_projectile.BoundingBox))
+                {
+                    m_groundHitCounter++;
+                    m_projectile.ApplyForce1();
+                }
+            }
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -124,6 +154,9 @@ namespace Berzerk
 
             // BATTER
             batter.DrawFrame(spriteBatch, batterPos);
+
+            // PROJECTILE
+            m_projectile.Draw(spriteBatch);
         }
     }
 }
