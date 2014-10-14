@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GameLib
 {
-    static class SoundEngine
+    public static class SoundEngine
     {
         private static List<Music> songs;
         private static List<Effect> soundEffects;

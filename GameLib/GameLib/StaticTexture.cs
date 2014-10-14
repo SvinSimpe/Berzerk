@@ -29,7 +29,7 @@ namespace GameLib
             m_position = position;
         }
 
-        void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         { }
 
         public void Draw(SpriteBatch spriteBatch)

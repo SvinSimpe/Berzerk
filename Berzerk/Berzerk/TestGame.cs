@@ -58,10 +58,11 @@ namespace Berzerk
         //========= POWER UP TEST =============
 
 
-
-
         public TestGame(GraphicsDevice graphics)
         {
+            // Sound init
+            SoundEngine.Initialize();
+
             this.graphics = graphics;
             batter = new AnimatedTexture(Vector2.Zero, rotation, scale, depth);
 
@@ -100,9 +101,15 @@ namespace Berzerk
             m_mine = new Mine(new Vector2(700, 680), content);
             //========= MINE TEST =============
 
+
             //========= MINE TEST =============
             m_powerUp = new PowerUp(new Vector2(900, 350), content);
             //========= MINE TEST =============
+
+            //========= LOAD SOUNDS =============
+            SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
+            //========= LOAD SOUNDS =============
+
         }
 
         public void Update(GameTime gameTime)
@@ -218,8 +225,11 @@ namespace Berzerk
             m_wasp.Update( gameTime );
 
             //Check collision with wasp
-            //if (m_projectile.BoundingBox.Intersects(m_wasp.BoundingBox))
-            //    m_projectile.ApplyForce2();
+            if (m_projectile.BoundingBox.Intersects(m_wasp.BoundingBox))
+            {
+                m_projectile.ApplyForce2();
+                SoundEngine.PlaySoundEffect("bee");
+            }
 
             ///////////////////////////   SLIME   ///////////////////////////
             m_slime.Update( gameTime );
