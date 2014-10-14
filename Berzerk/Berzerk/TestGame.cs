@@ -41,7 +41,6 @@ namespace Berzerk
         int m_groundHitCounter = 0;
         //========= PROJECTILE TEST =============
 
-
         //========= WASP TEST =============
         Wasp m_wasp;
         //========= WASP TEST =============
@@ -50,6 +49,9 @@ namespace Berzerk
         Slime m_slime;
         //========= SLIME TEST =============
 
+        //========= MINE TEST =============
+        Mine m_mine;
+        //========= MINE TEST =============
 
 
 
@@ -89,6 +91,10 @@ namespace Berzerk
             //========= SLIME TEST =============
             m_slime = new Slime(new Vector2(1000, 650), content);
             //========= SLIME TEST =============
+
+            //========= MINE TEST =============
+            m_mine = new Mine(new Vector2(700, 680), content);
+            //========= MINE TEST =============
         }
 
         public void Update(GameTime gameTime)
@@ -180,6 +186,7 @@ namespace Berzerk
 
             if (m_projectile.Flying)
             {
+                //Check collision with ground
                 if (groundRect.Intersects(m_projectile.BoundingBox))
                 {
                     m_groundHitCounter++;
@@ -191,13 +198,22 @@ namespace Berzerk
             m_wasp.Update( gameTime );
 
             //Check collision with wasp
-            //if (m_projectile.BoundingBox.Intersects( m_wasp.BoundingBox ) )
+            //if (m_projectile.BoundingBox.Intersects(m_wasp.BoundingBox))
             //    m_projectile.ApplyForce2();
 
             ///////////////////////////   SLIME   ///////////////////////////
             m_slime.Update( gameTime );
+
+            //Check collision with slime
             if (m_projectile.BoundingBox.Intersects(m_slime.BoundingBox))
                 m_projectile.ApplyForce3();
+
+            ///////////////////////////   MINE   ///////////////////////////
+            m_slime.Update(gameTime);
+
+            //Check collision with mine
+            if (m_projectile.BoundingBox.Intersects(m_mine.BoundingBox))
+                m_projectile.ApplyForce4();
 
         }
 
@@ -222,7 +238,10 @@ namespace Berzerk
             m_wasp.Draw( spriteBatch );
 
             // SLIME
-            m_slime.Draw(spriteBatch);
+            m_slime.Draw( spriteBatch );
+
+            // SLIME
+            m_mine.Draw(spriteBatch);
 
             spriteBatch.End();
         }
