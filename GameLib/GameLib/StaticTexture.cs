@@ -29,10 +29,10 @@ namespace GameLib
             m_position = position;
         }
 
-        void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         { }
 
-        void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(m_texture, m_position, Color.White);
         }
