@@ -91,8 +91,12 @@ namespace Berzerk
         public Projectile( Vector2 startPosition, ContentManager content )
             :base( content.Load<Texture2D>("Graphics/projectile0"), startPosition )
         {
-            m_angle     = MathHelper.ToRadians( 45 );
-            m_speed     = 80.0f;
+            m_angle = MathHelper.ToRadians(45);
+            m_speed = 80.0f;
+
+            //m_angle     = MathHelper.ToRadians( 12 );
+            //m_speed     = 40.0f;
+
             m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
             m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
             m_time      = 0.0f;
@@ -114,9 +118,6 @@ namespace Berzerk
             else
             {
                 m_speed *= (float)0.75;
-                m_landed = false;
-                m_flying = true;
-               // m_speed = 30;
                 m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
                 m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
                 m_time = 0.0f;
@@ -128,12 +129,20 @@ namespace Berzerk
 
         public void ApplyForce2()
         {
-            m_landed = false;
-            m_flying = true;
-            m_speed = 10;
+            m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
+            m_yVelocity = (float)Math.Sin(m_angle) * m_speed * (float)0.6;
+            m_time = 0.0f;
+        }
+
+        public void ApplyForce3()
+        {
+            m_speed     /= (float)3;
             m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
             m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
-            m_time = 0.0f;
+            m_time      = 0.0f;
+
+            //TEST
+            m_position.Y -= 10.0f;
         }
 
         public void Update( GameTime gameTime )
@@ -152,7 +161,7 @@ namespace Berzerk
 
         public void Draw( SpriteBatch spriteBatch )
         {
-            spriteBatch.Draw( m_texture, m_position, Color.White );
+            base.Draw(spriteBatch);
         }
 
         #endregion

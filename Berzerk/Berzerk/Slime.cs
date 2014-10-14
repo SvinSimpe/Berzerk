@@ -9,15 +9,15 @@ using GameLib;
 
 namespace Berzerk
 {
-    public class Wasp : StaticTexture
+    public class Slime : StaticTexture
     {
 
         #region Methods
 
-        public Wasp( Vector2 startPosition, ContentManager content )
-            : base(content.Load<Texture2D>("Graphics/wasp"), startPosition)
+        public Slime( Vector2 startPosition, ContentManager content )
+            : base( content.Load<Texture2D>("Graphics/slime"), startPosition )
         {
-            
+
         }
 
         public Rectangle BoundingBox
@@ -32,14 +32,9 @@ namespace Berzerk
             }
         }
 
-        public void Update( GameTime gameTime )
+        public void Update( GameTime gameTIme )
         {
 
-        }
-
-        public void Draw( SpriteBatch spriteBatch )
-        {
-            spriteBatch.Draw( m_texture, m_position, Color.White );
         }
 
         #endregion

@@ -42,6 +42,18 @@ namespace Berzerk
         //========= PROJECTILE TEST =============
 
 
+        //========= WASP TEST =============
+        Wasp m_wasp;
+        //========= WASP TEST =============
+
+        //========= SLIME TEST =============
+        Slime m_slime;
+        //========= SLIME TEST =============
+
+
+
+
+
 
         public TestGame(GraphicsDevice graphics)
         {
@@ -70,6 +82,14 @@ namespace Berzerk
             Vector2 projectilePosition = new Vector2(graphics.Viewport.Width / 2, 512);
             m_projectile = new Projectile(projectilePosition, content);
             //========= PROJECTILE TEST =============
+
+            //========= PROJECTILE TEST =============
+            m_wasp = new Wasp( new Vector2(700, 400), content );
+            //========= PROJECTILE TEST =============
+
+            //========= SLIME TEST =============
+            m_slime = new Slime(new Vector2(1000, 650), content);
+            //========= SLIME TEST =============
         }
 
         public void Update(GameTime gameTime)
@@ -179,6 +199,19 @@ namespace Berzerk
                     m_projectile.ApplyForce1();
                 }
             }
+
+            ///////////////////////////   WASP   ///////////////////////////
+            m_wasp.Update( gameTime );
+
+            //Check collision with wasp
+            //if (m_projectile.BoundingBox.Intersects( m_wasp.BoundingBox ) )
+            //    m_projectile.ApplyForce2();
+
+            ///////////////////////////   SLIME   ///////////////////////////
+            m_slime.Update( gameTime );
+            if (m_projectile.BoundingBox.Intersects(m_slime.BoundingBox))
+                m_projectile.ApplyForce3();
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -198,7 +231,14 @@ namespace Berzerk
             // PROJECTILE
             m_projectile.Draw(spriteBatch);
 
+            // WASP
+            m_wasp.Draw( spriteBatch );
+
+            // SLIME
+            m_slime.Draw(spriteBatch);
+
             spriteBatch.End();
+
         }
     }
 }
