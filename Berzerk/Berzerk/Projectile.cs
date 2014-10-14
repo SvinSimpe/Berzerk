@@ -5,10 +5,11 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using GameLib;
 
 namespace Berzerk
 {
-    public class Projectile
+    public class Projectile : StaticTexture
     {
         #region Fields & Properties
 
@@ -71,9 +72,8 @@ namespace Berzerk
 	    }
 
         public Projectile( Vector2 startPosition, ContentManager content )
+            :base( content.Load<Texture2D>("Graphics/Projectile/projectile0"), startPosition )
         {
-            m_position  = startPosition;
-            m_texture   = content.Load<Texture2D>("Graphics/Projectile/projectile0");
             m_angle     = MathHelper.ToRadians( 45 );
             m_speed     = 40.0f;
             m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
