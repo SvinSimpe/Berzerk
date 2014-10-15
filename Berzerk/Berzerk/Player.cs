@@ -13,10 +13,12 @@ namespace Berzerk
     public static class Player
     {
         #region Fields & Properties
-        private static int m_playerXP;  // Current XP
-        private static int m_playerLVL; // Current LVL
-        private static int m_highscore; // The furthest distance reached
-        private static int m_modifier;  // Increases each level & adds to swing power
+        private static int      m_playerXP;         // Current XP
+        private static int      m_playerLVL;        // Current LVL
+        private static int      m_highscore;        // The furthest distance reached
+        private static float    m_modifier;         // Increases each level & adds to swing power
+        private static int      m_currentDistance;  // Distance from each round
+        private static int      m_xpLimit;            // XP-limit of current lvl
 
         public static int XP
         {
@@ -36,10 +38,22 @@ namespace Berzerk
             set { m_highscore = value; }
         }
 
-        public static int Modifier
+        public static float Modifier
         {
             get { return m_modifier; }
             set { m_modifier = value; }
+        }
+
+        public static int CurrentDistance
+        {
+            get { return m_currentDistance; }
+            set { m_currentDistance = value; }
+        }
+
+        public static int XpLimit
+        {
+            get { return m_xpLimit; }
+            set { m_xpLimit = value; }
         }
         #endregion
 
@@ -47,9 +61,13 @@ namespace Berzerk
         public static void Initialize()
         {
             string[] stats = ReadFile();
-            m_playerXP  = Convert.ToInt32( stats[0] );
-            m_playerLVL = Convert.ToInt32( stats[1] );
-            m_highscore = Convert.ToInt32( stats[2] );
+            XP          = Convert.ToInt32( stats[0] );
+            LVL         = Convert.ToInt32( stats[1] );
+            Highscore   = Convert.ToInt32( stats[2] );
+
+            Modifier        = 1;
+            CurrentDistance = 0;
+            XpLimit         = 100;
         }
 
         public static string[] ReadFile()
@@ -75,9 +93,30 @@ namespace Berzerk
             {
                 string[] newStats = { Convert.ToString( XP ),
                                       Convert.ToString( LVL ),
+                                      savedStats[2]
                                     };
                 System.IO.File.WriteAllLines("PlayerStats.txt", newStats);
             }        
+        }
+
+        public static void CheckPlayerLvl()
+        {
+            XP += CurrentDistance/100;
+
+            if ( XP >= XpLimit )
+            {
+                //Reset XP but save remainder
+                XP = XP - XpLimit;
+
+                // Increase XP-limit with 50%
+                XpLimit = (int)((float)XpLimit * (float)1.5);
+
+                //Increase LVL
+                LVL++;
+
+                //Increase Mofifier
+                Modifier *= (float)1.1;    
+            }
         }
         #endregion
     }

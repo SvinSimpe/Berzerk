@@ -19,6 +19,10 @@ namespace Berzerk
         Camera2D camera;
         Vector2 cameraPosition;
 
+        GUI m_gui;
+        bool isFinish = false;
+        private float tempDistance;
+
         //FIRE CONTROL
         private bool m_isAngleChosen;
         private bool m_isPowerChosen;
@@ -58,6 +62,8 @@ namespace Berzerk
 
             m_isAngleChosen = false;
             m_isPowerChosen = false;
+
+            tempDistance = 0.0f;      
         }
 
         public void LoadContent(ContentManager content)
@@ -82,6 +88,17 @@ namespace Berzerk
             //========= POWER GAUGE =============
             m_powerGauge = new PowerGauge( content );
             //========= POWER GAUGE =============
+
+            //========= PLAYER =============
+            Player.Initialize();
+            //========= PLAYER =============
+
+            //========= GUI =============
+            m_gui = new GUI( content ) ;
+            m_gui.HighscoreString = Player.Highscore.ToString();
+            //========= GUI =============
+
+
 
         }
 
@@ -159,6 +176,7 @@ namespace Berzerk
                 
             }
 
+            UpdateGUI();
 
             m_prevState = m_currentState;
         }
@@ -181,8 +199,46 @@ namespace Berzerk
             if (m_isAngleChosen && !m_projectile.Flying && !m_projectile.Landed)
                 m_powerGauge.Draw(spriteBatch);
 
+
+
             spriteBatch.End();
 
+            spriteBatch.Begin();
+
+            // GUI
+            m_gui.Draw(spriteBatch, m_projectile.Landed);
+
+            spriteBatch.End();
+        }
+
+        private void UpdateGUI()
+        {
+            //Update GUI Info
+            //===============
+            if (m_projectile.Flying)
+            {
+                tempDistance += m_projectile.Speed / 8;
+                m_gui.DistanceString = tempDistance.ToString();
+                m_gui.HeightString = (((int)m_projectile.Position.Y * -1 + 617) / 20).ToString();
+            }
+
+            // When landed
+            if (m_projectile.Landed && !isFinish)
+            {
+                Player.CurrentDistance = (int)tempDistance;
+                Player.CheckPlayerLvl();
+
+                if (Player.Highscore < (int)tempDistance)
+                    m_gui.HighscoreString = tempDistance.ToString();
+                Player.Highscore        = (int)tempDistance;
+                Player.WriteFile();
+                m_gui.HeightString      = "0";
+                m_gui.LvlString         = Player.LVL.ToString();
+                m_gui.CurrXpString      = Player.XP.ToString();
+                m_gui.XpToNextString    = ( Player.XpLimit - Player.XP ).ToString();
+                isFinish = true;
+                
+            }
         }
     }
 }
