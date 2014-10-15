@@ -118,7 +118,7 @@ namespace Berzerk
 
         public void ApplyGroundForce()
         {
-            if (m_speed <= 6.5)
+            if (m_speed <= 3.5)
             {
                 m_speed = 0;
                 m_flying = false;
