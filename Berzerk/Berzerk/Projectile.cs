@@ -127,7 +127,7 @@ namespace Berzerk
             }
             else
             {
-                m_speed *= (float)0.75;
+                m_speed *= (float)0.85;
                 m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
                 m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
                 m_time = 0.0f;

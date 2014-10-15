@@ -45,7 +45,7 @@ namespace Berzerk
         Cloud m_cloud;
         Vector2 m_cloudPos;
         StaticTexture[] textures;
-        const int NUM_TEXTURES = 10;
+        const int NUM_TEXTURES = 30;
 
 
         // Properties
@@ -100,6 +100,28 @@ namespace Berzerk
             textures[7] = new Wasp( new Vector2(m_graphics.Viewport.Width  + waspText.Width, 300), content);
             textures[8] = new Wasp( new Vector2(m_graphics.Viewport.Width  + waspText.Width, 300), content);
             textures[9] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+
+            textures[10] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
+            textures[11] = new Slime(new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
+            textures[12] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
+            textures[13] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[14] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
+            textures[15] = new Slime(new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
+            textures[16] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
+            textures[17] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[18] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[19] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+
+            textures[20] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
+            textures[21] = new Slime(new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
+            textures[22] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
+            textures[23] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[24] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
+            textures[25] = new Slime(new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
+            textures[26] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
+            textures[27] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[28] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[29] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
         }
 
         public void Update(GameTime gameTime, Projectile projectile)
@@ -130,21 +152,24 @@ namespace Berzerk
             // Batter
             m_batter.UpdateFrame((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            // Textures
-            CheckTexturePositions();
             time += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            // Fixa att textures åker när allt är stilla, när simon fixat mätaren
-            if (projectile.XVelocity > 0)
+            // Textures
+            if( projectile.Flying)
             {
-                if (time >= 2)
-                {
-                    SpawnTexture();
-                    time = 0;
-                }
+                CheckTexturePositions();
 
-                for (int i = 0; i < NUM_TEXTURES; i++)
-                    textures[i].Update(gameTime, (int)projectile.XVelocity);
+                // Fixa att textures åker när allt är stilla, när simon fixat mätaren
+                if (projectile.XVelocity > 0)
+                {
+                    if (time >= 1)
+                    {
+                        SpawnTexture();
+                        time = 0;
+                    }
+
+                    for (int i = 0; i < NUM_TEXTURES; i++)
+                        textures[i].Update(gameTime, (int)projectile.XVelocity);
+                }
             }
             /////////////////////////////////////////////////////
 
