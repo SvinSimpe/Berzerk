@@ -192,7 +192,7 @@ namespace Berzerk
             m_projectile.Draw(spriteBatch);
 
             // ANGLE GAUGE
-            if(  !m_projectile.Flying && !m_projectile.Landed)
+            if(  !m_projectile.Flying && !m_projectile.Landed && !m_isAngleChosen)
                 m_angleGauge.Draw( spriteBatch );
 
             // POWER GAUGE

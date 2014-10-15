@@ -55,7 +55,7 @@ namespace Berzerk
 
         public AngleGauge( ContentManager content )
         {
-            m_texture           = content.Load<Texture2D>( "Graphics/angleGauge" );
+            m_texture           = content.Load<Texture2D>( "Graphics/angleGauge1" );
             m_position          = new Vector2( 150, 300 );
             m_meterTexture      = content.Load<Texture2D>("Graphics/angleMeter");
             m_meterPosition     = new Vector2(200, 150);

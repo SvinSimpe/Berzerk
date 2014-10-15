@@ -37,6 +37,7 @@ namespace Berzerk
         Texture2D cloudText;
         Texture2D waspText;
         Texture2D powerText;
+        StaticTexture boom;
         
         //Timer
         float time = 0;
@@ -71,10 +72,10 @@ namespace Berzerk
         {
             m_content = content;
             // Load background pictures
-            m_back1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back1"), new Rectangle(0, 0, 640, 720));
-            m_back2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back2"), new Rectangle(640, 0, 640, 720));
-            m_back3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back3"), new Rectangle(1280, 0, 640, 720));
-            m_back4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back4"), new Rectangle(1920, 0, 640, 720));
+            m_back1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back1"), new Rectangle(0, -720, 640, 1440));
+            m_back2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back2"), new Rectangle(640, -720, 640, 1440));
+            m_back3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back3"), new Rectangle(1280, -720, 640, 1440));
+            m_back4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back4"), new Rectangle(1920, -720, 640, 1440));
             m_plateau = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/Plateau"), new Rectangle(0, 360, 360, 360));
 
             // Batter
@@ -87,11 +88,13 @@ namespace Berzerk
             waspText  = content.Load<Texture2D>("Graphics/wasp");
             powerText = content.Load<Texture2D>("Graphics/powerUp");
 
+            boom = new StaticTexture(content.Load<Texture2D>("Graphics/boom"), new Vector2(m_graphics.Viewport.Width + 100, m_graphics.Viewport.Height - 120));
+
             rand = new Random();
             textures = new StaticTexture[NUM_TEXTURES];
             
             textures[0] = new Mine( new Vector2(m_graphics.Viewport.Width  + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
-            textures[1] = new Slime( new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
+            textures[1] = new Cloud( new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
             textures[2] = new Cloud( new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
             textures[3] = new Wasp( new Vector2(m_graphics.Viewport.Width  + waspText.Width, 300), content);
             textures[4] = new Mine( new Vector2(m_graphics.Viewport.Width  + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
@@ -101,19 +104,19 @@ namespace Berzerk
             textures[8] = new Wasp( new Vector2(m_graphics.Viewport.Width  + waspText.Width, 300), content);
             textures[9] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
 
-            textures[10] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
-            textures[11] = new Slime(new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
-            textures[12] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
+            textures[10] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[11] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[12] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[13] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
-            textures[14] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
-            textures[15] = new Slime(new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
-            textures[16] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
+            textures[14] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[15] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[16] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[17] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[18] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
-            textures[19] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[19] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
 
             textures[20] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
-            textures[21] = new Slime(new Vector2(m_graphics.Viewport.Width + slimeText.Width, m_graphics.Viewport.Height - (mineText.Height * 2)), content);
+            textures[21] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
             textures[22] = new Cloud(new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
             textures[23] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[24] = new Mine(new Vector2(m_graphics.Viewport.Width + mineText.Width, m_graphics.Viewport.Height - mineText.Height), content);
@@ -169,6 +172,14 @@ namespace Berzerk
 
                     for (int i = 0; i < NUM_TEXTURES; i++)
                         textures[i].Update(gameTime, (int)projectile.XVelocity);
+
+                    if (boom.m_isActive)
+                        boom.Update(gameTime, (int)projectile.XVelocity);
+                }
+
+                if (boom.m_position.X + boom.m_texture.Width <= 0)
+                {
+                    boom.m_isActive = false;
                 }
             }
             /////////////////////////////////////////////////////
@@ -191,6 +202,9 @@ namespace Berzerk
             // Textures
             for (int i = 0; i < NUM_TEXTURES; i++)
                 textures[i].Draw(spriteBatch);
+
+            if (boom.m_isActive)
+                boom.Draw(spriteBatch);
         }
 
         public void ResetLevel()
@@ -226,7 +240,7 @@ namespace Berzerk
             int randPos= 0;
             while (!valid)
             {
-                num = rand.Next(0, 9);
+                num = rand.Next(0, 29);
                 if (textures[num].m_isActive == false)
                     valid = true;
             }
@@ -287,8 +301,12 @@ namespace Berzerk
                             projectile.ApplySlimeForce();
                         // Mine
                         if (textures[i].GetType() == typeof(Mine))
+                        {
                             projectile.ApplyMineForce();
-                        // Mine
+                            boom.m_isActive = true;
+                            boom.m_position.X = textures[i].m_position.X;
+                        }
+                        // Powerup
                         if (textures[i].GetType() == typeof(PowerUp))
                         {
                             // isTaken = true;
