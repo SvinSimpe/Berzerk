@@ -57,6 +57,10 @@ namespace Berzerk
         PowerUp m_powerUp;
         //========= POWER UP TEST =============
 
+        //========= ANGE GAUGE TEST =============
+        AngleGauge m_angleGauge;
+        //========= ANGE GAUGE TEST =============
+
 
         public TestGame(GraphicsDevice graphics)
         {
@@ -107,8 +111,12 @@ namespace Berzerk
             //========= MINE TEST =============
 
             //========= LOAD SOUNDS =============
-            SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
+           // SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
             //========= LOAD SOUNDS =============
+
+            //========= ANGLE GAUGE =============
+            m_angleGauge = new AngleGauge( content );
+            //========= ANGLE GAUGE =============
 
         }
 
@@ -228,7 +236,7 @@ namespace Berzerk
             if (m_projectile.BoundingBox.Intersects(m_wasp.BoundingBox))
             {
                 m_projectile.ApplyForce2();
-                SoundEngine.PlaySoundEffect("bee");
+               // SoundEngine.PlaySoundEffect("bee");
             }
 
             ///////////////////////////   SLIME   ///////////////////////////
@@ -255,6 +263,9 @@ namespace Berzerk
                 //...
                 m_powerUp.IsTaken = true;
             }
+
+            ///////////////////////////   ANGLE GAUGE  ///////////////////////////
+            m_angleGauge.Update( gameTime );
 
         }
 
@@ -286,6 +297,9 @@ namespace Berzerk
 
             // POWER UP
             m_powerUp.Draw(spriteBatch);
+
+            // ANGLE GAUGE
+            m_angleGauge.Draw( spriteBatch );
 
             spriteBatch.End();
 
