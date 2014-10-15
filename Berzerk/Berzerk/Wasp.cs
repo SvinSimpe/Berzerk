@@ -32,14 +32,9 @@ namespace Berzerk
             }
         }
 
-        public void Update( GameTime gameTime )
+        public void Update(GameTime gameTime, int velocity)
         {
-
-        }
-
-        public void Draw( SpriteBatch spriteBatch )
-        {
-            spriteBatch.Draw( m_texture, m_position, Color.White );
+            base.Update(gameTime, velocity);
         }
 
         #endregion

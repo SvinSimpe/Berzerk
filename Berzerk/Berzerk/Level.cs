@@ -36,6 +36,7 @@ namespace Berzerk
         Texture2D slimeText;
         Texture2D cloudText;
         Texture2D waspText;
+        Texture2D powerText;
         
         //Timer
         float time = 0;
@@ -84,6 +85,7 @@ namespace Berzerk
             slimeText = content.Load<Texture2D>("Graphics/slime");
             cloudText = content.Load<Texture2D>("Graphics/cloud");
             waspText  = content.Load<Texture2D>("Graphics/wasp");
+            powerText = content.Load<Texture2D>("Graphics/powerUp");
 
             rand = new Random();
             textures = new StaticTexture[NUM_TEXTURES];
@@ -97,7 +99,7 @@ namespace Berzerk
             textures[6] = new Cloud( new Vector2(m_graphics.Viewport.Width + cloudText.Width, cloudText.Height + 10), content);
             textures[7] = new Wasp( new Vector2(m_graphics.Viewport.Width  + waspText.Width, 300), content);
             textures[8] = new Wasp( new Vector2(m_graphics.Viewport.Width  + waspText.Width, 300), content);
-            textures[9] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[9] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
         }
 
         public void Update(GameTime gameTime, Projectile projectile)
@@ -224,6 +226,12 @@ namespace Berzerk
                 randPos = rand.Next(0, 600);
                 textures[num].m_position.Y = randPos;
             }
+            if (textures[num].GetType() == typeof(PowerUp))
+            {
+                textures[num].m_isActive = true;
+                randPos = rand.Next(0, 600);
+                textures[num].m_position.Y = randPos;
+            }
         }
 
         private void CheckTexturePositions()
@@ -255,6 +263,11 @@ namespace Berzerk
                         // Mine
                         if (textures[i].GetType() == typeof(Mine))
                             projectile.ApplyMineForce();
+                        // Mine
+                        if (textures[i].GetType() == typeof(PowerUp))
+                        {
+                            // isTaken = true;
+                        }
                     }
                 }
             }
