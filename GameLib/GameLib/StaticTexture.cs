@@ -11,6 +11,19 @@ namespace GameLib
     {
         public Texture2D m_texture;
         public Vector2 m_position;
+        public bool m_isActive;
+
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle(
+                (int)m_position.X,
+                (int)m_position.Y,
+                m_texture.Width,
+                m_texture.Height);
+            }
+        }
 
         public Texture2D Texture
         {
@@ -27,15 +40,18 @@ namespace GameLib
         {
             m_texture = texture;
             m_position = position;
+            m_isActive = false;
         }
 
-        public void Update(GameTime gameTime)
-        { }
+        public void Update(GameTime gameTime, int velocity)
+        {
+            if(m_isActive)
+                m_position.X -= velocity;
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(m_texture, m_position, Color.White);
-        }
-        
+        }        
     }
 }

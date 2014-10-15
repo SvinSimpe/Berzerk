@@ -32,9 +32,9 @@ namespace Berzerk
             }
         }
 
-        public void Update( GameTime gameTime )
+        public void Update(GameTime gameTime, int velocity)
         {
-
+            base.Update(gameTime, velocity);
         }
 
         #endregion

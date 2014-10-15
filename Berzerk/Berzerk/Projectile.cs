@@ -103,7 +103,7 @@ namespace Berzerk
             m_direction.Y = (float)Math.Sin(m_angle);
         }
 
-        public void ApplyForce1()
+        public void ApplyGroundForce()
         {
             if (m_speed <= 6.5)
             {
@@ -123,14 +123,14 @@ namespace Berzerk
             }
         }
 
-        public void ApplyForce2()
+        public void ApplyWaspForce()
         {
             m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
             m_yVelocity = (float)Math.Sin(m_angle) * m_speed * (float)0.6;
             m_time = 0.0f;
         }
 
-        public void ApplyForce3()
+        public void ApplySlimeForce()
         {
             m_speed     /= (float)3;
             m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
@@ -141,7 +141,7 @@ namespace Berzerk
             m_position.Y -= 10.0f;
         }
 
-        public void ApplyForce4()
+        public void ApplyMineForce()
         {
             m_angle     = 45;
             m_speed     += 10;
