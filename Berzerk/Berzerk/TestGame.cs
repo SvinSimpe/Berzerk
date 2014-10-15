@@ -28,17 +28,18 @@ namespace Berzerk
         int m_groundHitCounter = 0;
         //========= PROJECTILE TEST =============
 
-        //========= WASP TEST =============
-        Wasp m_wasp;
-        //========= WASP TEST =============
+        //========= POWER UP TEST =============
+        PowerUp m_powerUp;
+        //========= POWER UP TEST =============
 
-        //========= SLIME TEST =============
-        Slime m_slime;
-        //========= SLIME TEST =============
+        //========= ANGLE GAUGE TEST =============
+        AngleGauge m_angleGauge;
+        //========= ANGLE GAUGE TEST =============
 
-        //========= MINE TEST =============
-        Mine m_mine;
-        //========= MINE TEST =============
+        //========= POWER GAUGE TEST =============
+        PowerGauge m_powerGauge;
+        //========= POWER GAUGE TEST =============
+
 
         public TestGame(GraphicsDevice graphics)
         {
@@ -64,21 +65,23 @@ namespace Berzerk
             m_projectile = new Projectile(projectilePosition, content);
             //========= PROJECTILE TEST =============
 
-            //========= PROJECTILE TEST =============
-            m_wasp = new Wasp( new Vector2(700, 400), content );
-            //========= PROJECTILE TEST =============
-
-            //========= SLIME TEST =============
-            m_slime = new Slime(new Vector2(1000, 650), content);
-            //========= SLIME TEST =============
 
             //========= MINE TEST =============
-            m_mine = new Mine(new Vector2(700, 680), content);
+            m_powerUp = new PowerUp(new Vector2(900, 350), content);
             //========= MINE TEST =============
 
             //========= LOAD SOUNDS =============
-            SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
+           // SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
             //========= LOAD SOUNDS =============
+
+            //========= ANGLE GAUGE =============
+            m_angleGauge = new AngleGauge( content );
+            //========= ANGLE GAUGE =============
+
+            //========= POWER GAUGE =============
+            m_powerGauge = new PowerGauge( content );
+            //========= POWER GAUGE =============
+
         }
 
         public void Update(GameTime gameTime)
@@ -130,8 +133,27 @@ namespace Berzerk
 
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
+
                 level.ResetLevel();
             }
+
+            ///////////////////////////   POWER UP   ///////////////////////////
+            m_powerUp.Update(gameTime);
+
+            //Check collision with powerup
+            if (m_projectile.BoundingBox.Intersects(m_powerUp.BoundingBox))
+            {
+                //Player receivs XP-reward from Power Up
+                //...
+                m_powerUp.IsTaken = true;
+            }
+
+            ///////////////////////////   ANGLE GAUGE  ///////////////////////////
+            m_angleGauge.Update( gameTime );
+
+            ///////////////////////////   POWER GAUGE  ///////////////////////////
+            m_powerGauge.Update( gameTime );
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -144,14 +166,14 @@ namespace Berzerk
             // PROJECTILE
             m_projectile.Draw(spriteBatch);
 
-            // WASP
-            m_wasp.Draw( spriteBatch );
+            // POWER UP
+            m_powerUp.Draw(spriteBatch);
 
-            // SLIME
-            m_slime.Draw( spriteBatch );
+            // ANGLE GAUGE
+            m_angleGauge.Draw( spriteBatch );
 
-            // SLIME
-            m_mine.Draw(spriteBatch);
+            // POWER GAUGE
+            m_powerGauge.Draw(spriteBatch);
 
             spriteBatch.End();
 
