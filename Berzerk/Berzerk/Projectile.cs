@@ -36,6 +36,12 @@ namespace Berzerk
             set { m_texture = value; }
         }
 
+        public float Speed
+        {
+            get { return m_speed; }
+            set { m_speed = value; }
+        }
+
         public float XVelocity
         {
             get { return m_xVelocity; }
@@ -93,8 +99,8 @@ namespace Berzerk
         {
             m_angle = MathHelper.ToRadians(45);
             m_speed = 80.0f;
-            m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
-            m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
+            m_xVelocity = 0;
+            m_yVelocity = 0;
             m_time      = 0.0f;
             m_flying    = false;
             m_landed    = false;
@@ -103,12 +109,20 @@ namespace Berzerk
             m_direction.Y = (float)Math.Sin(m_angle);
         }
 
+        public void Fire()
+        {
+            m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
+            m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
+            m_flying    = true;
+        }
+
         public void ApplyGroundForce()
         {
             if (m_speed <= 6.5)
             {
                 m_speed = 0;
                 m_flying = false;
+                m_landed = true;
                 m_time = 0;
             }
             else

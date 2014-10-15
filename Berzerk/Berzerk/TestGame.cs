@@ -19,6 +19,13 @@ namespace Berzerk
         Camera2D camera;
         Vector2 cameraPosition;
 
+        //FIRE CONTROL
+        private bool m_isAngleChosen;
+        private bool m_isPowerChosen;
+
+        KeyboardState m_prevState;
+        KeyboardState m_currentState;
+
         Level level;
 
         Rectangle groundRect = new Rectangle(0, 712, 1280, 7);  /// Checks intersection with projectile
@@ -52,6 +59,9 @@ namespace Berzerk
 
             camera = new Camera2D(graphics.Viewport);
             cameraPosition = new Vector2(graphics.Viewport.Width / 2, 0);
+
+            m_isAngleChosen = false;
+            m_isPowerChosen = false;
         }
 
         public void LoadContent(ContentManager content)
@@ -86,9 +96,11 @@ namespace Berzerk
 
         public void Update(GameTime gameTime)
         {
+            m_currentState = Keyboard.GetState();
+
             ///////////////////////////   LEVEL   ///////////////////////////
             level.Update(gameTime, m_projectile);
-
+            
             ///////////////////////////   BATTER   ///////////////////////////
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
@@ -115,11 +127,6 @@ namespace Berzerk
 
             ///////////////////////////   PROJECTILE   ///////////////////////////
             m_projectile.Update(gameTime);
-
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                m_projectile.Flying = true;
-            }
 
             if (m_projectile.Flying)
             {
@@ -149,11 +156,32 @@ namespace Berzerk
             }
 
             ///////////////////////////   ANGLE GAUGE  ///////////////////////////
-            m_angleGauge.Update( gameTime );
+            if (!m_isAngleChosen && !m_projectile.Flying)
+                m_angleGauge.Update( gameTime );
 
             ///////////////////////////   POWER GAUGE  ///////////////////////////
-            m_powerGauge.Update( gameTime );
+            if( m_isAngleChosen && !m_isPowerChosen && !m_projectile.Flying )
+                m_powerGauge.Update( gameTime );
 
+
+            ///////////////////////////   FIRE CONTROL  ///////////////////////////
+            if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && m_isAngleChosen)
+            {
+                m_isPowerChosen = true;
+                m_projectile.Speed = m_powerGauge.Power/2;
+                m_projectile.Fire();
+            }
+
+            if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && !m_isAngleChosen)
+            {
+                m_isAngleChosen = true;
+                m_angleGauge.IsAngleChosen = true;
+                m_projectile.Angle = MathHelper.ToRadians( m_angleGauge.Angle *-100 );
+                
+            }
+
+
+            m_prevState = m_currentState;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -170,10 +198,12 @@ namespace Berzerk
             m_powerUp.Draw(spriteBatch);
 
             // ANGLE GAUGE
-            m_angleGauge.Draw( spriteBatch );
+            if(  !m_projectile.Flying && !m_projectile.Landed)
+                m_angleGauge.Draw( spriteBatch );
 
             // POWER GAUGE
-            m_powerGauge.Draw(spriteBatch);
+            if (m_isAngleChosen && !m_projectile.Flying && !m_projectile.Landed)
+                m_powerGauge.Draw(spriteBatch);
 
             spriteBatch.End();
 

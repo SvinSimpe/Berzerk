@@ -14,8 +14,11 @@ namespace Berzerk
         #region Fields & Properties
         private Vector2     m_position;
         private Texture2D   m_texture;
+        private Vector2     m_meterPosition;
+        private Texture2D   m_meterTexture;
         private float       m_angle;
         private bool        m_isAngleIncreasing;
+        private bool        m_isAngleChosen;
  
         public Vector2 Position
         {
@@ -40,6 +43,12 @@ namespace Berzerk
             get { return m_isAngleIncreasing; }
             set { m_isAngleIncreasing = value; }
         }
+
+        public bool IsAngleChosen
+        {
+            get { return m_isAngleChosen; }
+            set { m_isAngleChosen = value; }
+        }
         #endregion
 
         #region Method
@@ -48,8 +57,11 @@ namespace Berzerk
         {
             m_texture           = content.Load<Texture2D>( "Graphics/angleGauge" );
             m_position          = new Vector2( 150, 300 );
+            m_meterTexture      = content.Load<Texture2D>("Graphics/angleMeter");
+            m_meterPosition     = new Vector2(200, 150);
             m_angle             = MathHelper.ToRadians( 0 );
             m_isAngleIncreasing = true;
+            m_isAngleChosen     = false;
         }
 
         public Rectangle BoundingBox
@@ -82,6 +94,9 @@ namespace Berzerk
         public void Draw( SpriteBatch spriteBatch )
         {
             spriteBatch.Draw(m_texture, BoundingBox, null, Color.White, m_angle, new Vector2(-100, 15), SpriteEffects.None, 0);
+
+            if( !IsAngleChosen )
+                spriteBatch.Draw(m_meterTexture, m_meterPosition, Color.White);
         }
 
         #endregion
