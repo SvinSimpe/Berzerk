@@ -114,7 +114,7 @@ namespace Berzerk
             if (m_projectile.Flying)
             {
                 //Check collision with ground
-                if (groundRect.Intersects(m_projectile.BoundingBox))
+                if (groundRect.Intersects(m_projectile.BoundingBox) || m_projectile.BoundingBox.Bottom >= groundRect.Top )
                 {
                     m_groundHitCounter++;
                     m_projectile.ApplyGroundForce();
