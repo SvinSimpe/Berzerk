@@ -57,9 +57,13 @@ namespace Berzerk
         PowerUp m_powerUp;
         //========= POWER UP TEST =============
 
-        //========= ANGE GAUGE TEST =============
+        //========= ANGLE GAUGE TEST =============
         AngleGauge m_angleGauge;
-        //========= ANGE GAUGE TEST =============
+        //========= ANGLE GAUGE TEST =============
+
+        //========= POWER GAUGE TEST =============
+        PowerGauge m_powerGauge;
+        //========= POWER GAUGE TEST =============
 
 
         public TestGame(GraphicsDevice graphics)
@@ -117,6 +121,10 @@ namespace Berzerk
             //========= ANGLE GAUGE =============
             m_angleGauge = new AngleGauge( content );
             //========= ANGLE GAUGE =============
+
+            //========= POWER GAUGE =============
+            m_powerGauge = new PowerGauge( content );
+            //========= POWER GAUGE =============
 
         }
 
@@ -267,6 +275,9 @@ namespace Berzerk
             ///////////////////////////   ANGLE GAUGE  ///////////////////////////
             m_angleGauge.Update( gameTime );
 
+            ///////////////////////////   ANGLE GAUGE  ///////////////////////////
+            m_powerGauge.Update( gameTime );
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -300,6 +311,9 @@ namespace Berzerk
 
             // ANGLE GAUGE
             m_angleGauge.Draw( spriteBatch );
+
+            // POWER GAUGE
+            m_powerGauge.Draw(spriteBatch);
 
             spriteBatch.End();
 
