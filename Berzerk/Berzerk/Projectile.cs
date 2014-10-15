@@ -158,7 +158,7 @@ namespace Berzerk
         public void ApplyMineForce()
         {
             m_angle     = 45;
-            m_speed     += 10;
+            m_speed     += 50;
             m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
             m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
             m_time      = 0.0f;
@@ -171,7 +171,7 @@ namespace Berzerk
         {
             if (m_flying)
             {
-                float gravity = 20009.82f;
+                float gravity = 10009.82f;
                 float millisecs = gameTime.ElapsedGameTime.Milliseconds;
                 millisecs /= 10000;
                 m_time += millisecs;

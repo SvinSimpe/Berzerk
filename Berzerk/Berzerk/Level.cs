@@ -37,6 +37,7 @@ namespace Berzerk
         Texture2D cloudText;
         Texture2D waspText;
         Texture2D powerText;
+        StaticTexture boom;
         
         //Timer
         float time = 0;
@@ -86,6 +87,8 @@ namespace Berzerk
             cloudText = content.Load<Texture2D>("Graphics/cloud");
             waspText  = content.Load<Texture2D>("Graphics/wasp");
             powerText = content.Load<Texture2D>("Graphics/powerUp");
+
+            boom = new StaticTexture(content.Load<Texture2D>("Graphics/boom"), new Vector2(m_graphics.Viewport.Width + 100, m_graphics.Viewport.Height - 120));
 
             rand = new Random();
             textures = new StaticTexture[NUM_TEXTURES];
@@ -169,6 +172,14 @@ namespace Berzerk
 
                     for (int i = 0; i < NUM_TEXTURES; i++)
                         textures[i].Update(gameTime, (int)projectile.XVelocity);
+
+                    if (boom.m_isActive)
+                        boom.Update(gameTime, (int)projectile.XVelocity);
+                }
+
+                if (boom.m_position.X + boom.m_texture.Width <= 0)
+                {
+                    boom.m_isActive = false;
                 }
             }
             /////////////////////////////////////////////////////
@@ -191,6 +202,9 @@ namespace Berzerk
             // Textures
             for (int i = 0; i < NUM_TEXTURES; i++)
                 textures[i].Draw(spriteBatch);
+
+            if (boom.m_isActive)
+                boom.Draw(spriteBatch);
         }
 
         public void ResetLevel()
@@ -287,8 +301,12 @@ namespace Berzerk
                             projectile.ApplySlimeForce();
                         // Mine
                         if (textures[i].GetType() == typeof(Mine))
+                        {
                             projectile.ApplyMineForce();
-                        // Mine
+                            boom.m_isActive = true;
+                            boom.m_position.X = textures[i].m_position.X;
+                        }
+                        // Powerup
                         if (textures[i].GetType() == typeof(PowerUp))
                         {
                             // isTaken = true;
