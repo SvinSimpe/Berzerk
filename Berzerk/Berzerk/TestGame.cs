@@ -35,10 +35,6 @@ namespace Berzerk
         int m_groundHitCounter = 0;
         //========= PROJECTILE TEST =============
 
-        //========= POWER UP TEST =============
-        PowerUp m_powerUp;
-        //========= POWER UP TEST =============
-
         //========= ANGLE GAUGE TEST =============
         AngleGauge m_angleGauge;
         //========= ANGLE GAUGE TEST =============
@@ -74,11 +70,6 @@ namespace Berzerk
             Vector2 projectilePosition = new Vector2(200, 250);
             m_projectile = new Projectile(projectilePosition, content);
             //========= PROJECTILE TEST =============
-
-
-            //========= MINE TEST =============
-            m_powerUp = new PowerUp(new Vector2(900, 350), content);
-            //========= MINE TEST =============
 
             //========= LOAD SOUNDS =============
            // SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
@@ -123,7 +114,6 @@ namespace Berzerk
             }
             else
                 camera.Update(gameTime, m_projectile.Position.Y);
-            /////////////////////////////////////////////////////////////////
 
             ///////////////////////////   PROJECTILE   ///////////////////////////
             m_projectile.Update(gameTime);
@@ -131,7 +121,7 @@ namespace Berzerk
             if (m_projectile.Flying)
             {
                 //Check collision with ground
-                if (groundRect.Intersects(m_projectile.BoundingBox))
+                if (groundRect.Intersects(m_projectile.BoundingBox) || m_projectile.BoundingBox.Bottom >= groundRect.Top )
                 {
                     m_groundHitCounter++;
                     m_projectile.ApplyGroundForce();
@@ -142,17 +132,6 @@ namespace Berzerk
             {
 
                 level.ResetLevel();
-            }
-
-            ///////////////////////////   POWER UP   ///////////////////////////
-            m_powerUp.Update(gameTime);
-
-            //Check collision with powerup
-            if (m_projectile.BoundingBox.Intersects(m_powerUp.BoundingBox))
-            {
-                //Player receivs XP-reward from Power Up
-                //...
-                m_powerUp.IsTaken = true;
             }
 
             ///////////////////////////   ANGLE GAUGE  ///////////////////////////
@@ -193,9 +172,6 @@ namespace Berzerk
 
             // PROJECTILE
             m_projectile.Draw(spriteBatch);
-
-            // POWER UP
-            m_powerUp.Draw(spriteBatch);
 
             // ANGLE GAUGE
             if(  !m_projectile.Flying && !m_projectile.Landed)
