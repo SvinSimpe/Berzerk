@@ -78,6 +78,7 @@ namespace Berzerk
             m_back4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back4"), new Rectangle(1920, -720, 640, 1440));
             m_plateau = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/Plateau"), new Rectangle(0, 360, 360, 360));
 
+
             // Batter
             m_batter.Load(content, "Graphics/BatterIdle", 2, 3);
 

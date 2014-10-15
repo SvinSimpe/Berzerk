@@ -171,7 +171,7 @@ namespace Berzerk
         {
             if (m_flying)
             {
-                float gravity = 10009.82f;
+                float gravity = 8009.82f;
                 float millisecs = gameTime.ElapsedGameTime.Milliseconds;
                 millisecs /= 10000;
                 m_time += millisecs;
