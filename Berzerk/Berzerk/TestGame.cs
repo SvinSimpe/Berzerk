@@ -81,17 +81,21 @@ namespace Berzerk
            // SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
             //========= LOAD SOUNDS =============
 
+            //========= PLAYER =============
+            Player.Initialize();
+            //========= PLAYER =============
+
             //========= ANGLE GAUGE =============
             m_angleGauge = new AngleGauge( content );
             //========= ANGLE GAUGE =============
 
             //========= POWER GAUGE =============
             m_powerGauge = new PowerGauge( content );
-            //========= POWER GAUGE =============
 
-            //========= PLAYER =============
-            Player.Initialize();
-            //========= PLAYER =============
+            // Let NeedleSpeed depend on Player LVL
+            if (Player.LVL > 1)
+                m_powerGauge.NeedleSpeed *= (float)(Math.Pow( 0.95f, Player.LVL));
+            //========= POWER GAUGE =============
 
             //========= GUI =============
             m_gui = new GUI( content ) ;
@@ -164,7 +168,10 @@ namespace Berzerk
             if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && m_isAngleChosen)
             {
                 m_isPowerChosen = true;
-                m_projectile.Speed = m_powerGauge.Power/2 *  Player.Modifier;
+                if (m_powerGauge.NeedlePosition.Y == 100.0f) // PERFECT HIT
+                    m_projectile.Speed = m_powerGauge.Power / 2 * (Player.Modifier * (float)2.0f);
+                else
+                    m_projectile.Speed = m_powerGauge.Power / 2 *Player.Modifier;
                 m_projectile.Fire();
             }
 
@@ -172,8 +179,8 @@ namespace Berzerk
             {
                 m_isAngleChosen = true;
                 m_angleGauge.IsAngleChosen = true;
-                m_projectile.Angle = MathHelper.ToRadians( m_angleGauge.Angle *-100 );
-                
+                m_projectile.Angle = m_angleGauge.Angle * (float)-1;
+               
             }
 
             UpdateGUI();
