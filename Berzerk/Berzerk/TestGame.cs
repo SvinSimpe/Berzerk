@@ -164,7 +164,7 @@ namespace Berzerk
             if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && m_isAngleChosen)
             {
                 m_isPowerChosen = true;
-                m_projectile.Speed = m_powerGauge.Power/2;
+                m_projectile.Speed = m_powerGauge.Power/2 *  Player.Modifier;
                 m_projectile.Fire();
             }
 

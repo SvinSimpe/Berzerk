@@ -64,10 +64,10 @@ namespace Berzerk
             XP          = Convert.ToInt32( stats[0] );
             LVL         = Convert.ToInt32( stats[1] );
             Highscore   = Convert.ToInt32( stats[2] );
+            Modifier    = (float)Convert.ToDecimal( stats[3] );
+            XpLimit     = Convert.ToInt32( stats[4] );
 
-            Modifier        = 1;
             CurrentDistance = 0;
-            XpLimit         = 100;
         }
 
         public static string[] ReadFile()
@@ -85,7 +85,9 @@ namespace Berzerk
             {
                 string[] newStats = { Convert.ToString( XP ),
                                       Convert.ToString( LVL ),
-                                      Convert.ToString( Highscore ) 
+                                      Convert.ToString( Highscore ),
+                                      Convert.ToString( Modifier ),
+                                      Convert.ToString( XpLimit )
                                     };
                 System.IO.File.WriteAllLines("PlayerStats.txt", newStats);
             }
@@ -93,7 +95,9 @@ namespace Berzerk
             {
                 string[] newStats = { Convert.ToString( XP ),
                                       Convert.ToString( LVL ),
-                                      savedStats[2]
+                                      savedStats[2],
+                                      Convert.ToString( Modifier ),
+                                      Convert.ToString( XpLimit )
                                     };
                 System.IO.File.WriteAllLines("PlayerStats.txt", newStats);
             }        
