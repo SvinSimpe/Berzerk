@@ -72,7 +72,7 @@ namespace Berzerk
             //===========  INCREASING  ============
             if (IsPowerIncreasing)
             {
-                Power += 15.0f;
+                Power += 8.0f;
                 m_needlePosition.Y -= ( 15.0f * NeedleSpeed );
             }
 
@@ -85,7 +85,7 @@ namespace Berzerk
             //===========  DECREASING  ============
             if (!IsPowerIncreasing)
             {
-                Power -= 15.0f;
+                Power -= 8.0f;
                 m_needlePosition.Y += ( 15.0f * NeedleSpeed );
             }
 
