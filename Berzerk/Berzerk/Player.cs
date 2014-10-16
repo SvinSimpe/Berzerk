@@ -67,7 +67,7 @@ namespace Berzerk
 
             Modifier        = 1;
             CurrentDistance = 0;
-            XpLimit         = 100;
+            XpLimit         = 75;
         }
 
         public static string[] ReadFile()
@@ -109,7 +109,8 @@ namespace Berzerk
                 XP = XP - XpLimit;
 
                 // Increase XP-limit with 50%
-                XpLimit = (int)((float)XpLimit * (float)1.5);
+                //XpLimit = (int)((float)XpLimit * (float)1.5);
+                XpLimit = (int)((LVL * 75) * (float)0.5f);
 
                 //Increase LVL
                 LVL++;

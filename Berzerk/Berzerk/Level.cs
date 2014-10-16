@@ -252,7 +252,8 @@ namespace Berzerk
             }
             if (textures[num].GetType() == typeof(Slime))
             {
-                textures[num].m_isActive = true;
+                // no slime while developing
+                //textures[num].m_isActive = true;
             }
             if (textures[num].GetType() == typeof(Cloud))
             {
