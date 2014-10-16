@@ -47,6 +47,14 @@ namespace Berzerk
         PowerGauge m_powerGauge;
         //========= POWER GAUGE TEST =============
 
+        //========= POWER HIT TEST =============
+        AnimatedTexture m_powerHit;
+        Vector2 m_powerHitPos;
+        bool drawPowerHit = false;
+        int powerHitDrawTime = 2;
+        float powerHitElapsed = 0;
+        //========= POWER HIT TEST =============
+
 
         public TestGame(GraphicsDevice graphics)
         {
@@ -63,7 +71,12 @@ namespace Berzerk
             m_isAngleChosen = false;
             m_isPowerChosen = false;
 
-            tempDistance = 0.0f;      
+            tempDistance = 0.0f;
+
+            //========= POWER HIT TEST =============
+            m_powerHit = new AnimatedTexture(Vector2.Zero, 0.0f, 1.0f, 0.5f);
+            m_powerHitPos = new Vector2(0, 35);
+            //========= POWER HIT TEST =============
         }
 
         public void LoadContent(ContentManager content)
@@ -101,6 +114,10 @@ namespace Berzerk
             m_gui = new GUI( content ) ;
             m_gui.HighscoreString = Player.Highscore.ToString();
             //========= GUI =============
+
+            //========= POWER HIT TEST =============
+            m_powerHit.Load(content, "Graphics/hit", 3, 3);
+            //========= POWER HIT TEST =============
         }
 
         public void Update(GameTime gameTime)
@@ -166,10 +183,16 @@ namespace Berzerk
             {
                 m_isPowerChosen = true;
                 if (m_powerGauge.NeedlePosition.Y == 100.0f) // PERFECT HIT
+                {
+                    drawPowerHit = true;
                     m_projectile.Speed = m_powerGauge.Power / 2 * (Player.Modifier * (float)2.0f);
+                }
                 else
-                    m_projectile.Speed = m_powerGauge.Power / 2 *Player.Modifier;
-                m_projectile.Fire();
+                    m_projectile.Speed = m_powerGauge.Power / 2 * Player.Modifier;
+                {
+                    drawPowerHit = true;
+                    m_projectile.Fire();
+                }
             }
 
             if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && !m_isAngleChosen)
@@ -179,6 +202,19 @@ namespace Berzerk
                 m_projectile.Angle = m_angleGauge.Angle * (float)-1;
                
             }
+
+            //========= POWER HIT TEST =============
+            m_powerHit.UpdateFrame((float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            if (drawPowerHit)
+            {
+                powerHitElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (powerHitElapsed > powerHitDrawTime)
+                {
+                    powerHitElapsed = 0;
+                    drawPowerHit = false;
+                }
+            }
+            //========= POWER HIT TEST =============
 
             UpdateGUI();
 
@@ -211,6 +247,10 @@ namespace Berzerk
 
             // GUI
             m_gui.Draw(spriteBatch, m_projectile.Landed);
+
+            //========= POWER HIT TEST =============
+            if (drawPowerHit)
+                m_powerHit.DrawFrame(spriteBatch, m_powerHitPos);
 
             spriteBatch.End();
         }
