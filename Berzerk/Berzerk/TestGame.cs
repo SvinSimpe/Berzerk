@@ -32,7 +32,7 @@ namespace Berzerk
 
         Level level;
 
-        Rectangle groundRect = new Rectangle(0, 712, 1280, 7);  /// Checks intersection with projectile
+        Rectangle groundRect = new Rectangle(0, 700, 1280, 5);  /// Checks intersection with projectile
 
         //========= PROJECTILE TEST =============
         Projectile m_projectile;
@@ -164,7 +164,7 @@ namespace Berzerk
             if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && m_isAngleChosen)
             {
                 m_isPowerChosen = true;
-                m_projectile.Speed = m_powerGauge.Power/2;
+                m_projectile.Speed = m_powerGauge.Power/2 *  Player.Modifier;
                 m_projectile.Fire();
             }
 

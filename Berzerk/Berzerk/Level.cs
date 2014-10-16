@@ -18,10 +18,24 @@ namespace Berzerk
         Rectangle groundRect;
 
         // Backgrounds
+        // Ground
         private ScrollingBackground m_back1;
         private ScrollingBackground m_back2;
         private ScrollingBackground m_back3;
         private ScrollingBackground m_back4;
+        // Sky
+        private ScrollingBackground m_sky1;
+        private ScrollingBackground m_sky2;
+        private ScrollingBackground m_sky3;
+        private ScrollingBackground m_sky4;
+        private ScrollingBackground m_sky5;
+        private ScrollingBackground m_sky6;
+        private ScrollingBackground m_sky7;
+        private ScrollingBackground m_sky8;
+        private ScrollingBackground m_sky9;
+        // Space
+        private ScrollingBackground m_space1;
+
         private ScrollingBackground m_plateau;
 
         // Batter
@@ -72,11 +86,26 @@ namespace Berzerk
         {
             m_content = content;
             // Load background pictures
-            m_back1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back1"), new Rectangle(0, -720, 640, 1440));
-            m_back2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back2"), new Rectangle(640, -720, 640, 1440));
-            m_back3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back3"), new Rectangle(1280, -720, 640, 1440));
-            m_back4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back4"), new Rectangle(1920, -720, 640, 1440));
+            // Ground
+            m_back1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back1"), new Rectangle(0, -1328, 640, 2048));
+            m_back2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back2"), new Rectangle(640, -1328, 640, 2048));
+            m_back3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back3"), new Rectangle(1280, -1328, 640, 2048));
+            m_back4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back4"), new Rectangle(1920, -1328, 640, 2048));
+            // Sky1
+            m_sky1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -3376, 1280, 2048));
+            m_sky2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -5424, 1280, 2048));
+            m_sky3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -7472, 1280, 2048));
+            m_sky4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -9520, 1280, 2048));
+            m_sky5 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -11560, 1280, 2048));
+            m_sky6 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -13616, 1280, 2048));
+            m_sky7 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -15664, 1280, 2048));
+            m_sky8 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -17712, 1280, 2048));
+            m_sky9 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -19760, 1280, 2048));
+            // Space
+            m_space1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/space"), new Rectangle(0, -21808, 1280, 2048));
+
             m_plateau = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/Plateau"), new Rectangle(0, 360, 360, 360));
+
 
 
             // Batter
@@ -128,9 +157,10 @@ namespace Berzerk
             textures[29] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
         }
 
-        public void Update(GameTime gameTime, Projectile projectile)
+        private void UpdateBackgrounds()
         {
             // Backgrounds
+            // Ground
             if (m_back1.rectangle.X + m_back1.texture.Width <= 0)
                 m_back1.rectangle.X = m_back4.rectangle.X + m_back4.texture.Width;
             if (m_back2.rectangle.X + m_back2.texture.Width <= 0)
@@ -139,6 +169,12 @@ namespace Berzerk
                 m_back3.rectangle.X = m_back2.rectangle.X + m_back2.texture.Width;
             if (m_back4.rectangle.X + m_back4.texture.Width <= 0)
                 m_back4.rectangle.X = m_back3.rectangle.X + m_back3.texture.Width;
+        }
+
+        public void Update(GameTime gameTime, Projectile projectile)
+        {
+            // Backgrounds
+            UpdateBackgrounds();
 
             if (projectile.Flying)
             {
@@ -191,10 +227,24 @@ namespace Berzerk
         public void Draw(SpriteBatch spriteBatch)
         {
             // Backgrounds
+            // Ground
             m_back1.Draw(spriteBatch);
             m_back2.Draw(spriteBatch);
             m_back3.Draw(spriteBatch);
             m_back4.Draw(spriteBatch);
+            // Sky
+            m_sky1.Draw(spriteBatch);
+            m_sky2.Draw(spriteBatch);
+            m_sky3.Draw(spriteBatch);
+            m_sky4.Draw(spriteBatch);
+            m_sky5.Draw(spriteBatch);
+            m_sky6.Draw(spriteBatch);
+            m_sky7.Draw(spriteBatch);
+            m_sky8.Draw(spriteBatch);
+            m_sky9.Draw(spriteBatch);
+            // Space
+            m_space1.Draw(spriteBatch);
+
             m_plateau.Draw(spriteBatch);
 
             // Batter
