@@ -9,9 +9,10 @@ namespace GameLib
 {
     public class StaticTexture
     {
-        public Texture2D m_texture;
-        public Vector2 m_position;
-        public bool m_isActive;
+        public Texture2D    m_texture;
+        public Vector2      m_position;
+        public bool         m_isActive;
+        public bool         m_isHit;
 
         public Rectangle BoundingBox
         {
@@ -34,6 +35,18 @@ namespace GameLib
         {
             get { return m_position; }
             set { m_position = value; }
+        }
+
+        public bool IsActive
+        {
+            get { return m_isActive; }
+            set { m_isActive = value; }
+        }
+
+        public bool IsHit
+        {
+            get { return m_isHit; }
+            set { m_isHit = value; }
         }
 
         public StaticTexture( Texture2D texture, Vector2 position)

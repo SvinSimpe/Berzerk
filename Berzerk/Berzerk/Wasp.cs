@@ -34,6 +34,8 @@ namespace Berzerk
 
         public void Update(GameTime gameTime, int velocity)
         {
+            if (IsHit)
+                m_position.Y += gameTime.ElapsedGameTime.Milliseconds;
             base.Update(gameTime, velocity);
         }
 

@@ -158,7 +158,7 @@ namespace Berzerk
 
             time += (float)gameTime.ElapsedGameTime.TotalSeconds;
             // Textures
-            if( projectile.Flying)
+            if (projectile.Flying)
             {
                 CheckTexturePositions();
 
@@ -172,20 +172,25 @@ namespace Berzerk
                     }
 
                     for (int i = 0; i < NUM_TEXTURES; i++)
-                        textures[i].Update(gameTime, (int)projectile.XVelocity);
+                    {
+                        if (textures[i].GetType() == typeof(Wasp))
+                            ((Wasp)textures[i]).Update(gameTime, (int)projectile.XVelocity);
+                        else
+                            textures[i].Update(gameTime, (int)projectile.XVelocity);
 
-                    if (boom.m_isActive)
-                        boom.Update(gameTime, (int)projectile.XVelocity);
-                }
+                        if (boom.m_isActive)
+                            boom.Update(gameTime, (int)projectile.XVelocity);
+                    }
 
-                if (boom.m_position.X + boom.m_texture.Width <= 0)
-                {
-                    boom.m_isActive = false;
+                    if (boom.m_position.X + boom.m_texture.Width <= 0)
+                    {
+                        boom.m_isActive = false;
+                    }
                 }
+                /////////////////////////////////////////////////////
+
+                ApplyPhysics(projectile);
             }
-            /////////////////////////////////////////////////////
-
-            ApplyPhysics(projectile);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -253,6 +258,7 @@ namespace Berzerk
             if (textures[num].GetType() == typeof(Slime))
             {
                 textures[num].m_isActive = true;
+                textures[num].IsHit = false;
             }
             if (textures[num].GetType() == typeof(Cloud))
             {
@@ -265,6 +271,7 @@ namespace Berzerk
                 textures[num].m_isActive = true;
                 randPos = rand.Next(0, 600);
                 textures[num].m_position.Y = randPos;
+                textures[num].IsHit = false;
             }
             if (textures[num].GetType() == typeof(PowerUp))
             {
@@ -295,11 +302,17 @@ namespace Berzerk
                     if (projectile.BoundingBox.Intersects(textures[i].BoundingBox))
                     {
                         // Wasp
-                        if (textures[i].GetType() == typeof(Wasp))
+                        if (textures[i].GetType() == typeof(Wasp) && !textures[i].IsHit)
+                        {
                             projectile.ApplyWaspForce();
+                            textures[i].IsHit = true;
+                        }
                         // Slime
-                        if (textures[i].GetType() == typeof(Slime))
+                        if (textures[i].GetType() == typeof(Slime) && !textures[i].IsHit )
+                        {
                             projectile.ApplySlimeForce();
+                            textures[i].IsHit = true;
+                        }
                         // Mine
                         if (textures[i].GetType() == typeof(Mine))
                         {
@@ -308,7 +321,7 @@ namespace Berzerk
                             boom.m_position.X = textures[i].m_position.X;
                         }
                         // Powerup
-                        if (textures[i].GetType() == typeof(PowerUp))
+                        if (textures[i].GetType() == typeof(PowerUp) )
                         {
                             // isTaken = true;
                         }

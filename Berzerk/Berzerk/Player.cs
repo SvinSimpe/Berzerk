@@ -107,7 +107,7 @@ namespace Berzerk
         {
             XP += CurrentDistance/100;
 
-            if ( XP >= XpLimit )
+            while ( XP >= XpLimit )
             {
                 //Reset XP but save remainder
                 XP = XP - XpLimit;
