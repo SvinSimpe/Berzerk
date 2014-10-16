@@ -36,6 +36,8 @@ namespace Berzerk
         {
             if (IsHit)
                 m_position.Y += gameTime.ElapsedGameTime.Milliseconds;
+            if (IsActive)
+                m_position.X--;
             base.Update(gameTime, velocity);
         }
 
