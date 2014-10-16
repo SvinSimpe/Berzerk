@@ -32,7 +32,7 @@ namespace Berzerk
 
         Level level;
 
-        Rectangle groundRect = new Rectangle(0, 700, 1280, 5);  /// Checks intersection with projectile
+        Rectangle groundRect = new Rectangle(0, 620, 1280, 5);  /// Checks intersection with projectile
 
         //========= PROJECTILE TEST =============
         Projectile m_projectile;
@@ -101,9 +101,6 @@ namespace Berzerk
             m_gui = new GUI( content ) ;
             m_gui.HighscoreString = Player.Highscore.ToString();
             //========= GUI =============
-
-
-
         }
 
         public void Update(GameTime gameTime)
