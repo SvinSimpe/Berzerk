@@ -441,6 +441,5 @@ namespace Berzerk
                 }
             }
         }
-
     }
 }

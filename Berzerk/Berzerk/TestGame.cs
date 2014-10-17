@@ -300,6 +300,7 @@ namespace Berzerk
             m_gui.DistanceString        = "Distance:" + '\n' + "    0";
             m_projectile.m_position     = m_projectile.InitPosition;
             Player.NrOfPowerUps         = 0;
+            isFinish                    = false;
         }
     }
 }
