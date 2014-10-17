@@ -246,7 +246,10 @@ namespace Berzerk
             spriteBatch.Begin();
 
             // GUI
-            m_gui.Draw(spriteBatch, m_projectile.Landed);
+            if(m_projectile.m_position.Y > -19760)
+                m_gui.Draw(spriteBatch, Color.Black, m_projectile.Landed);
+            else
+                m_gui.Draw(spriteBatch, Color.White, m_projectile.Landed);
 
             //========= POWER HIT TEST =============
             if (drawPowerHit)
