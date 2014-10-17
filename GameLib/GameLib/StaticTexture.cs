@@ -11,6 +11,7 @@ namespace GameLib
     {
         public Texture2D    m_texture;
         public Vector2      m_position;
+        public Vector2      m_initPosition;
         public bool         m_isActive;
         public bool         m_isHit;
 
@@ -37,6 +38,12 @@ namespace GameLib
             set { m_position = value; }
         }
 
+        public Vector2 InitPosition
+        {
+            get { return m_initPosition; }
+            set { m_initPosition = value; }
+        }
+
         public bool IsActive
         {
             get { return m_isActive; }
@@ -51,9 +58,10 @@ namespace GameLib
 
         public StaticTexture( Texture2D texture, Vector2 position)
         {
-            m_texture = texture;
-            m_position = position;
-            m_isActive = false;
+            m_texture       = texture;
+            m_position      = position;
+            m_initPosition  = m_position;
+            m_isActive      = false;
         }
 
         public void Update(GameTime gameTime, int velocity)
@@ -65,6 +73,13 @@ namespace GameLib
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(m_texture, m_position, Color.White);
-        }        
+        }
+
+        public void Reset()
+        {
+            m_position = InitPosition;
+            m_isActive = false;
+            m_isHit = false;
+        }
     }
 }

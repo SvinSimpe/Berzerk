@@ -70,7 +70,6 @@ namespace Berzerk
             set { m_batter = value; }
         }
 
-
         public Level(GraphicsDevice graphics)
         {
             m_graphics = graphics;
@@ -275,6 +274,9 @@ namespace Berzerk
 
             // Batter
             m_batter.Load(m_content, "Graphics/BatterIdle", 2, 3);
+
+            for (int i = 0; i < NUM_TEXTURES; i++)
+                textures[i].Reset();
         }
 
         public void BatterCharge()
