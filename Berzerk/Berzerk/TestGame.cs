@@ -182,7 +182,7 @@ namespace Berzerk
             if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && m_isAngleChosen)
             {
                 m_isPowerChosen = true;
-                if (m_powerGauge.NeedlePosition.Y == 100.0f) // PERFECT HIT
+                if (m_powerGauge.NeedlePosition.Y <= 120.0f) // PERFECT HIT
                 {
                     drawPowerHit = true;
                     m_projectile.Speed = m_powerGauge.Power / 2 * (Player.Modifier * (float)2.0f);
