@@ -190,7 +190,7 @@ namespace Berzerk
                 else
                     m_projectile.Speed = m_powerGauge.Power / 2 * Player.Modifier;
                 {
-                    drawPowerHit = true;
+                    //drawPowerHit = true;
                     m_projectile.Fire();
                 }
             }
