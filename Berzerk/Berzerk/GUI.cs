@@ -64,23 +64,23 @@ namespace Berzerk
         {
             m_guiFont = content.Load<SpriteFont>("GuiFont");
 
-            m_distanceString    = "0";
+            m_distanceString    = "Distance:" + '\n' + "    0";
             m_distancePosition  = new Vector2(15, 10);
 
-            m_heightString      = "0";
-            m_heightPosition    = new Vector2(530, 10);
+            m_heightString      = "Height:" + '\n' + "   0";
+            m_heightPosition    = new Vector2(550, 10);
 
             m_highscoreString   = "HIGHSCORE";
-            m_highscorePosition = new Vector2(950, 10);
+            m_highscorePosition = new Vector2(1050, 10);
 
             m_currXpString      = "CURRXP";
-            m_currXpPosition    = new Vector2(250, 300);
+            m_currXpPosition    = new Vector2(300, 230);
 
             m_xpToNextString    = "XPTONEXT";
-            m_xpToNextPosition  = new Vector2(750, 300);
+            m_xpToNextPosition  = new Vector2(800, 230);
 
             m_lvlString         = "LVL";
-            m_lvlPosition       = new Vector2(550, 400);
+            m_lvlPosition       = new Vector2(550, 360);
         }
 
         public void Update( GameTime gameTime )
@@ -90,16 +90,15 @@ namespace Berzerk
 
         public void Draw( SpriteBatch spriteBatch, bool landed = false )
         {
-            //m_distancePosition.X = m_guiFont.MeasureString( m_distanceString ).X /2;
-            spriteBatch.DrawString( m_guiFont, m_distanceString,  m_distancePosition,  Color.White );
-            spriteBatch.DrawString( m_guiFont, m_heightString,    m_heightPosition,    Color.White );
-            spriteBatch.DrawString( m_guiFont, m_highscoreString, m_highscorePosition, Color.White );
+            spriteBatch.DrawString( m_guiFont, m_distanceString,  m_distancePosition,  Color.Black );
+            spriteBatch.DrawString(m_guiFont, m_heightString, m_heightPosition, Color.Black);
+            spriteBatch.DrawString(m_guiFont, m_highscoreString, m_highscorePosition, Color.Black);
 
             if ( landed )
             {
-                spriteBatch.DrawString(m_guiFont, m_currXpString,   m_currXpPosition,   Color.White);
-                spriteBatch.DrawString(m_guiFont, m_xpToNextString, m_xpToNextPosition, Color.White);
-                spriteBatch.DrawString(m_guiFont, m_lvlString,      m_lvlPosition,      Color.White);
+                spriteBatch.DrawString(m_guiFont, m_currXpString, m_currXpPosition, Color.Black);
+                spriteBatch.DrawString(m_guiFont, m_xpToNextString, m_xpToNextPosition, Color.Black);
+                spriteBatch.DrawString(m_guiFont, m_lvlString, m_lvlPosition, Color.Black);
             }
         }
         #endregion

@@ -432,9 +432,10 @@ namespace Berzerk
                             boom.m_position.X = textures[i].m_position.X;
                         }
                         // Powerup
-                        if (textures[i].GetType() == typeof(PowerUp) )
+                        if (textures[i].GetType() == typeof(PowerUp) && !((PowerUp)textures[i]).IsTaken )
                         {
-                            // isTaken = true;
+                            ( (PowerUp)textures[i] ).IsTaken = true;
+                            Player.NrOfPowerUps++;                        
                         }
                     }
                 }
