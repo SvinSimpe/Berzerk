@@ -112,7 +112,7 @@ namespace Berzerk
 
             //========= GUI =============
             m_gui = new GUI( content ) ;
-            m_gui.HighscoreString = Player.Highscore.ToString();
+            m_gui.HighscoreString = "Highscore: " + '\n' + "  " + Player.Highscore.ToString();
             //========= GUI =============
 
             //========= POWER HIT TEST =============
@@ -262,8 +262,8 @@ namespace Berzerk
             if (m_projectile.Flying)
             {
                 tempDistance += m_projectile.Speed / 8;
-                m_gui.DistanceString = tempDistance.ToString();
-                m_gui.HeightString = (((int)m_projectile.Position.Y * -1 + 617) / 20).ToString();
+                m_gui.DistanceString = "Distance: " + '\n' + tempDistance.ToString();
+                m_gui.HeightString = "Height:" + '\n' + "  " + (((int)m_projectile.Position.Y * -1 + 617) / 20).ToString();
             }
 
             // When landed
@@ -273,13 +273,13 @@ namespace Berzerk
                 Player.CheckPlayerLvl();
 
                 if (Player.Highscore < (int)tempDistance)
-                    m_gui.HighscoreString = tempDistance.ToString();
+                    m_gui.HighscoreString = "Highscore: " + '\n' + tempDistance.ToString();
                 Player.Highscore        = (int)tempDistance;
                 Player.WriteFile();
-                m_gui.HeightString      = "0";
-                m_gui.LvlString         = Player.LVL.ToString();
-                m_gui.CurrXpString      = Player.XP.ToString();
-                m_gui.XpToNextString    = ( Player.XpLimit - Player.XP ).ToString();
+                m_gui.HeightString      = "Height:" + '\n' + "   0";
+                m_gui.LvlString = "Level: " + '\n' + " " + Player.LVL.ToString();
+                m_gui.CurrXpString = " XP: " + '\n' + Player.XP.ToString();
+                m_gui.XpToNextString = "To next: " + '\n' + " " + (Player.XpLimit - Player.XP).ToString();
                 isFinish = true;
                 
             }
@@ -294,8 +294,9 @@ namespace Berzerk
             m_projectile.Landed         = false;
             Player.CurrentDistance      = 0;
             tempDistance                = 0;
-            m_gui.DistanceString        = tempDistance.ToString();
+            m_gui.DistanceString        = "Distance:" + '\n' + "    0";
             m_projectile.m_position     = m_projectile.InitPosition;
+            Player.NrOfPowerUps         = 0;
         }
     }
 }

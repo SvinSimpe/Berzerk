@@ -18,7 +18,8 @@ namespace Berzerk
         private static int      m_highscore;        // The furthest distance reached
         private static float    m_modifier;         // Increases each level & adds to swing power
         private static int      m_currentDistance;  // Distance from each round
-        private static int      m_xpLimit;            // XP-limit of current lvl
+        private static int      m_xpLimit;          // XP-limit of current lvl
+        private static int      m_nrOfPowerUps;
 
         public static int XP
         {
@@ -54,6 +55,12 @@ namespace Berzerk
         {
             get { return m_xpLimit; }
             set { m_xpLimit = value; }
+        }
+
+        public static int NrOfPowerUps
+        {
+            get { return m_nrOfPowerUps; }
+            set { m_nrOfPowerUps = value; }
         }
         #endregion
 
@@ -105,7 +112,12 @@ namespace Berzerk
 
         public static void CheckPlayerLvl()
         {
+            // Convert distance to XP
             XP += CurrentDistance/100;
+            
+            // Check if PowerUps is taken
+            if( NrOfPowerUps > 0 )
+                XP *= (int)(1.0f + ( NrOfPowerUps * 0.5f ) );
 
             while ( XP >= XpLimit )
             {
