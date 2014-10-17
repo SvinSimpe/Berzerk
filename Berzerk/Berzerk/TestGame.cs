@@ -165,8 +165,8 @@ namespace Berzerk
 
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
-
                 level.ResetLevel();
+                ResetGame();
             }
 
             ///////////////////////////   ANGLE GAUGE  ///////////////////////////
@@ -283,6 +283,19 @@ namespace Berzerk
                 isFinish = true;
                 
             }
+        }
+
+        private void ResetGame()
+        {
+            m_angleGauge.IsAngleChosen  = false;
+            m_isAngleChosen             = false;
+            m_isPowerChosen             = false;
+            m_projectile.Flying         = false;
+            m_projectile.Landed         = false;
+            Player.CurrentDistance      = 0;
+            tempDistance                = 0;
+            m_gui.DistanceString        = tempDistance.ToString();
+            m_projectile.m_position     = m_projectile.InitPosition;
         }
     }
 }
