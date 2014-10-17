@@ -23,6 +23,10 @@ namespace Berzerk
         private ScrollingBackground m_back2;
         private ScrollingBackground m_back3;
         private ScrollingBackground m_back4;
+        private ScrollingBackground m_back5;
+        private ScrollingBackground m_back6;
+        private ScrollingBackground m_back7;
+        private ScrollingBackground m_back8;
         // Sky
         private ScrollingBackground m_sky1;
         private ScrollingBackground m_sky2;
@@ -43,7 +47,7 @@ namespace Berzerk
         Vector2             m_batterPos;
 
         // Projectile
-        //Projectile m_projectile;
+        Projectile m_projectile;
  
         // StaticTextures
         Texture2D mineText;
@@ -91,18 +95,22 @@ namespace Berzerk
             m_back2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back2"), new Rectangle(640, -1328, 640, 2048));
             m_back3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back3"), new Rectangle(1280, -1328, 640, 2048));
             m_back4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back4"), new Rectangle(1920, -1328, 640, 2048));
+            m_back5 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back5"), new Rectangle(2560, -1328, 640, 2048));
+            m_back6 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back6"), new Rectangle(3200, -1328, 640, 2048));
+            m_back7 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back7"), new Rectangle(3840, -1328, 640, 2048));
+            m_back8 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/back8"), new Rectangle(4480, -1328, 640, 2048));
             // Sky1
             m_sky1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -3376, 1280, 2048));
             m_sky2 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -5424, 1280, 2048));
             m_sky3 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -7472, 1280, 2048));
             m_sky4 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -9520, 1280, 2048));
             m_sky5 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -11560, 1280, 2048));
-            m_sky6 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -13616, 1280, 2048));
-            m_sky7 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -15664, 1280, 2048));
-            m_sky8 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -17712, 1280, 2048));
-            m_sky9 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -19760, 1280, 2048));
+            m_sky6 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -13606, 1280, 2048));
+            m_sky7 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -15654, 1280, 2048));
+            m_sky8 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -17702, 1280, 2048));
+            m_sky9 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/sky"), new Rectangle(0, -19750, 1280, 2048));
             // Space
-            m_space1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/space"), new Rectangle(0, -21808, 1280, 2048));
+            m_space1 = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/space"), new Rectangle(0, -21798, 1280, 2048));
 
             m_plateau = new ScrollingBackground(content.Load<Texture2D>("Graphics/Backgrounds/Plateau"), new Rectangle(0, 360, 360, 360));
 
@@ -118,7 +126,7 @@ namespace Berzerk
             waspText  = content.Load<Texture2D>("Graphics/wasp");
             powerText = content.Load<Texture2D>("Graphics/powerUp");
 
-            boom = new StaticTexture(content.Load<Texture2D>("Graphics/boom"), new Vector2(m_graphics.Viewport.Width + 100, m_graphics.Viewport.Height - 120));
+            boom = new StaticTexture(content.Load<Texture2D>("Graphics/boom"), new Vector2(m_graphics.Viewport.Width + 100, 625 - 120));
 
             rand = new Random();
             textures = new StaticTexture[NUM_TEXTURES];
@@ -162,17 +170,27 @@ namespace Berzerk
             // Backgrounds
             // Ground
             if (m_back1.rectangle.X + m_back1.texture.Width <= 0)
-                m_back1.rectangle.X = m_back4.rectangle.X + m_back4.texture.Width;
+                m_back1.rectangle.X = m_back8.rectangle.X + m_back8.texture.Width;
             if (m_back2.rectangle.X + m_back2.texture.Width <= 0)
                 m_back2.rectangle.X = m_back1.rectangle.X + m_back3.texture.Width;
             if (m_back3.rectangle.X + m_back3.texture.Width <= 0)
                 m_back3.rectangle.X = m_back2.rectangle.X + m_back2.texture.Width;
             if (m_back4.rectangle.X + m_back4.texture.Width <= 0)
                 m_back4.rectangle.X = m_back3.rectangle.X + m_back3.texture.Width;
+           
+            if (m_back5.rectangle.X + m_back5.texture.Width <= 0)
+                m_back5.rectangle.X = m_back4.rectangle.X + m_back4.texture.Width;
+            if (m_back6.rectangle.X + m_back6.texture.Width <= 0)
+                m_back6.rectangle.X = m_back5.rectangle.X + m_back5.texture.Width;
+            if (m_back7.rectangle.X + m_back7.texture.Width <= 0)
+                m_back7.rectangle.X = m_back6.rectangle.X + m_back6.texture.Width;
+            if (m_back8.rectangle.X + m_back8.texture.Width <= 0)
+                m_back8.rectangle.X = m_back7.rectangle.X + m_back7.texture.Width;
         }
 
         public void Update(GameTime gameTime, Projectile projectile)
         {
+            m_projectile = projectile;
             // Backgrounds
             UpdateBackgrounds();
 
@@ -182,6 +200,10 @@ namespace Berzerk
                 m_back2.Update((int)projectile.XVelocity);
                 m_back3.Update((int)projectile.XVelocity);
                 m_back4.Update((int)projectile.XVelocity);
+                m_back5.Update((int)projectile.XVelocity);
+                m_back6.Update((int)projectile.XVelocity);
+                m_back7.Update((int)projectile.XVelocity);
+                m_back8.Update((int)projectile.XVelocity);
                 if (m_plateau.rectangle.X + m_plateau.texture.Width > 0)
                 {
                     m_plateau.Update((int)projectile.XVelocity);
@@ -198,7 +220,6 @@ namespace Berzerk
             {
                 CheckTexturePositions();
 
-                // Fixa att textures åker när allt är stilla, när simon fixat mätaren
                 if (projectile.XVelocity > 0)
                 {
                     if (time >= 1)
@@ -209,13 +230,13 @@ namespace Berzerk
 
                     for (int i = 0; i < NUM_TEXTURES; i++)
                     {
+                        if (boom.m_isActive)
+                            boom.Update(gameTime, (int)projectile.XVelocity);
+
                         if (textures[i].GetType() == typeof(Wasp))
                             ((Wasp)textures[i]).Update(gameTime, (int)projectile.XVelocity);
                         else
                             textures[i].Update(gameTime, (int)projectile.XVelocity);
-
-                        if (boom.m_isActive)
-                            boom.Update(gameTime, (int)projectile.XVelocity);
                     }
 
                     if (boom.m_position.X + boom.m_texture.Width <= 0)
@@ -237,6 +258,10 @@ namespace Berzerk
             m_back2.Draw(spriteBatch);
             m_back3.Draw(spriteBatch);
             m_back4.Draw(spriteBatch);
+            m_back5.Draw(spriteBatch);
+            m_back6.Draw(spriteBatch);
+            m_back7.Draw(spriteBatch);
+            m_back8.Draw(spriteBatch);
             // Sky
             m_sky1.Draw(spriteBatch);
             m_sky2.Draw(spriteBatch);
@@ -289,16 +314,26 @@ namespace Berzerk
             m_batter.Load(m_content, "Graphics/BatterHit", 2, 3);
         }
 
+        // SPAWNER
         private void SpawnTexture()
         {
             bool valid = false;
             int num = 0;
-            int randPos= 0;
             while (!valid)
             {
                 num = rand.Next(0, 29);
                 if (textures[num].m_isActive == false)
-                    valid = true;
+                {
+                    if (textures[num].GetType() == typeof(PowerUp))
+                    {
+                        if (m_projectile.m_position.Y < -17712)
+                        {
+                            valid = true;
+                        }
+                    }
+                    else
+                        valid = true;
+                }
             }
   
             if (textures[num].GetType() == typeof(Mine))
@@ -310,24 +345,44 @@ namespace Berzerk
                 textures[num].m_isActive = true;
                 textures[num].IsHit = false;
             }
-            if (textures[num].GetType() == typeof(Cloud))
+            if (textures[num].GetType() == typeof(Cloud))       // CLOUD
             {
+                int offset;
+                int spawnPos;
+                if (m_projectile.m_position.Y > 500)
+                    spawnPos = rand.Next(0, 100);
+                else
+                {
+                    offset = rand.Next(-360, 360);
+                    spawnPos = (int)m_projectile.m_position.Y + offset;
+                    if (spawnPos > 100)
+                        spawnPos = 100;
+                }
+
                 textures[num].m_isActive = true;
-                randPos = rand.Next( 0, 400 );
-                textures[num].m_position.Y = randPos;
+                textures[num].m_position.Y = spawnPos;
             }
             if (textures[num].GetType() == typeof(Wasp))
             {
+                int offset = rand.Next(-360, 360);
+                int spawnPos = (int)m_projectile.m_position.Y + offset;
+                if (spawnPos > 368)
+                {
+                    offset = rand.Next(-70, 10);
+                    spawnPos = 368 + offset;
+                }
+
                 textures[num].m_isActive = true;
-                randPos = rand.Next(0, 600);
-                textures[num].m_position.Y = randPos;
+                textures[num].m_position.Y = spawnPos;
                 textures[num].IsHit = false;
             }
             if (textures[num].GetType() == typeof(PowerUp))
             {
+                int offset = rand.Next(-500, 500);
+                int spawnPos = (int)m_projectile.m_position.Y + offset;
                 textures[num].m_isActive = true;
-                randPos = rand.Next(0, 600);
-                textures[num].m_position.Y = randPos;
+                textures[num].m_position.Y = spawnPos;
+                textures[num].IsHit = false;
             }
         }
 
