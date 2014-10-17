@@ -88,17 +88,17 @@ namespace Berzerk
 
         }
 
-        public void Draw( SpriteBatch spriteBatch, bool landed = false )
+        public void Draw(SpriteBatch spriteBatch, Color color, bool landed = false)
         {
-            spriteBatch.DrawString( m_guiFont, m_distanceString,  m_distancePosition,  Color.Black );
-            spriteBatch.DrawString(m_guiFont, m_heightString, m_heightPosition, Color.Black);
-            spriteBatch.DrawString(m_guiFont, m_highscoreString, m_highscorePosition, Color.Black);
+            spriteBatch.DrawString(m_guiFont, m_distanceString, m_distancePosition, color);
+            spriteBatch.DrawString(m_guiFont, m_heightString, m_heightPosition, color);
+            spriteBatch.DrawString(m_guiFont, m_highscoreString, m_highscorePosition, color);
 
             if ( landed )
             {
-                spriteBatch.DrawString(m_guiFont, m_currXpString, m_currXpPosition, Color.Black);
-                spriteBatch.DrawString(m_guiFont, m_xpToNextString, m_xpToNextPosition, Color.Black);
-                spriteBatch.DrawString(m_guiFont, m_lvlString, m_lvlPosition, Color.Black);
+                spriteBatch.DrawString(m_guiFont, m_currXpString, m_currXpPosition, color);
+                spriteBatch.DrawString(m_guiFont, m_xpToNextString, m_xpToNextPosition, color);
+                spriteBatch.DrawString(m_guiFont, m_lvlString, m_lvlPosition, color);
             }
         }
         #endregion
