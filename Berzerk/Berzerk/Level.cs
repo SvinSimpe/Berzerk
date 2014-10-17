@@ -294,6 +294,10 @@ namespace Berzerk
             m_back2.Reset();
             m_back3.Reset();
             m_back4.Reset();
+            m_back5.Reset();
+            m_back6.Reset();
+            m_back7.Reset();
+            m_back8.Reset();
             m_plateau.Reset();
             m_batterPos.X = 100;
 
