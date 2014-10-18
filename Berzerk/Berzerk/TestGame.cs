@@ -181,6 +181,8 @@ namespace Berzerk
             ///////////////////////////   FIRE CONTROL  ///////////////////////////
             if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && m_isAngleChosen)
             {
+                if (m_powerGauge.Power < 5.0f)
+                    m_powerGauge.Power = 5.0f;
                 m_isPowerChosen = true;
                 if (m_powerGauge.NeedlePosition.Y <= 120.0f) // PERFECT HIT
                 {
