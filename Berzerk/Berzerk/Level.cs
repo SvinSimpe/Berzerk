@@ -234,6 +234,8 @@ namespace Berzerk
 
                         if (textures[i].GetType() == typeof(Wasp))
                             ((Wasp)textures[i]).Update(gameTime, (int)projectile.XVelocity);
+                        else if (textures[i].GetType() == typeof(Cloud))
+                            ((Cloud)textures[i]).Update(gameTime, (int)projectile.XVelocity);
                         else
                             textures[i].Update(gameTime, (int)projectile.XVelocity);
                     }
@@ -281,7 +283,12 @@ namespace Berzerk
 
             // Textures
             for (int i = 0; i < NUM_TEXTURES; i++)
-                textures[i].Draw(spriteBatch);
+            {
+                if (textures[i].GetType() == typeof(Cloud))
+                    ((Cloud)textures[i]).Draw(spriteBatch);
+                else
+                    textures[i].Draw(spriteBatch);
+            }
 
             if (boom.m_isActive)
                 boom.Draw(spriteBatch);
@@ -396,7 +403,7 @@ namespace Berzerk
         {
             for( int i = 0; i < NUM_TEXTURES; i++)
             {
-                if (textures[i].m_position.X + textures[i].m_texture.Width <= 0)
+                if (textures[i].m_position.X + textures[i].m_texture.Width <= -200)
                 {
                     textures[i].m_isActive = false;
                     textures[i].m_position.X = m_graphics.Viewport.Width;
