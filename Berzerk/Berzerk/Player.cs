@@ -97,11 +97,11 @@ namespace Berzerk
             string[] savedStats = ReadFile();
 
             // If new Highscore
-            if (Convert.ToInt32(savedStats[2]) < Highscore)
+            if (Convert.ToInt32(savedStats[2]) < CurrentDistance)
             {
                 string[] newStats = { Convert.ToString( XP ),
                                       Convert.ToString( LVL ),
-                                      Convert.ToString( Highscore ),
+                                      Convert.ToString( CurrentDistance ),
                                       Convert.ToString( Modifier ),
                                       Convert.ToString( XpLimit ),
                                       Convert.ToString( PlayerGold )

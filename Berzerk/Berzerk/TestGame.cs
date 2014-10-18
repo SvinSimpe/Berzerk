@@ -279,7 +279,7 @@ namespace Berzerk
 
                 if (Player.Highscore < (int)tempDistance)
                     m_gui.HighscoreString = "Highscore: " + '\n' + tempDistance.ToString();
-                Player.Highscore        = (int)tempDistance;
+
                 Player.WriteFile();
                 m_gui.HeightString      = "Height:" + '\n' + "   0";
                 m_gui.LvlString = "Level: " + '\n' + " " + Player.LVL.ToString();
