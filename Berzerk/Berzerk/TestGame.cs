@@ -181,8 +181,10 @@ namespace Berzerk
             ///////////////////////////   FIRE CONTROL  ///////////////////////////
             if (m_currentState.IsKeyDown(Keys.Space) && m_prevState.IsKeyUp(Keys.Space) && m_isAngleChosen)
             {
+                if (m_powerGauge.Power < 5.0f)
+                    m_powerGauge.Power = 5.0f;
                 m_isPowerChosen = true;
-                if (m_powerGauge.NeedlePosition.Y <= 120.0f) // PERFECT HIT
+                if (m_powerGauge.NeedlePosition.Y <= 105.0f) // PERFECT HIT
                 {
                     drawPowerHit = true;
                     m_projectile.Speed = m_powerGauge.Power / 2 * (Player.Modifier * (float)2.0f);
@@ -277,7 +279,7 @@ namespace Berzerk
 
                 if (Player.Highscore < (int)tempDistance)
                     m_gui.HighscoreString = "Highscore: " + '\n' + tempDistance.ToString();
-                Player.Highscore        = (int)tempDistance;
+
                 Player.WriteFile();
                 m_gui.HeightString      = "Height:" + '\n' + "   0";
                 m_gui.LvlString = "Level: " + '\n' + " " + Player.LVL.ToString();

@@ -55,6 +55,7 @@ namespace Berzerk
         Texture2D cloudText;
         Texture2D waspText;
         Texture2D powerText;
+        Texture2D goldText;
         StaticTexture boom;
         
         //Timer
@@ -64,7 +65,7 @@ namespace Berzerk
         Cloud m_cloud;
         Vector2 m_cloudPos;
         StaticTexture[] textures;
-        const int NUM_TEXTURES = 30;
+        const int NUM_TEXTURES = 40;
 
 
         // Properties
@@ -124,6 +125,7 @@ namespace Berzerk
             cloudText = content.Load<Texture2D>("Graphics/cloud");
             waspText  = content.Load<Texture2D>("Graphics/wasp");
             powerText = content.Load<Texture2D>("Graphics/powerUp");
+            goldText  = content.Load<Texture2D>("Graphics/gold");
 
             boom = new StaticTexture(content.Load<Texture2D>("Graphics/boom"), new Vector2(m_graphics.Viewport.Width + 100, 625 - 120));
 
@@ -162,6 +164,18 @@ namespace Berzerk
             textures[27] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[28] = new Wasp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[29] = new PowerUp(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+
+
+            textures[30] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[31] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[32] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[33] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[34] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[35] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[36] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[37] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[38] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[39] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
         }
 
         private void UpdateBackgrounds()
@@ -286,6 +300,18 @@ namespace Berzerk
             {
                 if (textures[i].GetType() == typeof(Cloud))
                     ((Cloud)textures[i]).Draw(spriteBatch);
+
+                else if( textures[i].GetType() == typeof( PowerUp ) )
+                {
+                    if (!((PowerUp)textures[i]).IsTaken)
+                        textures[i].Draw(spriteBatch);
+                }
+                
+                else if (textures[i].GetType() == typeof(Gold))
+                {
+                    if (!((Gold)textures[i]).IsTaken)
+                        textures[i].Draw(spriteBatch);
+                }
                 else
                     textures[i].Draw(spriteBatch);
             }
@@ -334,7 +360,7 @@ namespace Berzerk
             int num = 0;
             while (!valid)
             {
-                num = rand.Next(0, 29);
+                num = rand.Next(0, 39);
                 if (textures[num].m_isActive == false)
                 {
                     if (textures[num].GetType() == typeof(PowerUp))
@@ -397,6 +423,20 @@ namespace Berzerk
                 textures[num].m_position.Y = spawnPos;
                 textures[num].IsHit = false;
             }
+            if (textures[num].GetType() == typeof(Gold))
+            {
+                int offset = rand.Next(-360, 360);
+                int spawnPos = (int)m_projectile.m_position.Y + offset;
+                if (spawnPos > 368)
+                {
+                    offset = rand.Next(-70, 10);
+                    spawnPos = 368 + offset;
+                }
+
+                textures[num].m_isActive = true;
+                textures[num].m_position.Y = spawnPos;
+                textures[num].IsHit = false;
+            }
         }
 
         private void CheckTexturePositions()
@@ -443,6 +483,13 @@ namespace Berzerk
                         {
                             ( (PowerUp)textures[i] ).IsTaken = true;
                             Player.NrOfPowerUps++;                        
+                        }
+                        // Gold
+                        if (textures[i].GetType() == typeof(Gold) && !((Gold)textures[i]).IsTaken)
+                        {
+                            SoundEngine.PlaySoundEffect("coin");
+                            ((Gold)textures[i]).IsTaken = true;
+                            Player.PlayerGold += ((Gold)textures[i]).Amount;
                         }
                     }
                 }
