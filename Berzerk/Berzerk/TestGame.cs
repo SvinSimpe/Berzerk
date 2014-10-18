@@ -184,7 +184,7 @@ namespace Berzerk
                 if (m_powerGauge.Power < 5.0f)
                     m_powerGauge.Power = 5.0f;
                 m_isPowerChosen = true;
-                if (m_powerGauge.NeedlePosition.Y <= 120.0f) // PERFECT HIT
+                if (m_powerGauge.NeedlePosition.Y <= 105.0f) // PERFECT HIT
                 {
                     drawPowerHit = true;
                     m_projectile.Speed = m_powerGauge.Power / 2 * (Player.Modifier * (float)2.0f);
