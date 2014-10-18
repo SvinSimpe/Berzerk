@@ -32,7 +32,7 @@ namespace Berzerk
         public Gold(Vector2 startPosition, ContentManager content)
             : base(content.Load<Texture2D>("Graphics/gold"), startPosition)
         {
-
+            m_amount = 100;
         }
 
         public Rectangle BoundingBox

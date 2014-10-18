@@ -484,7 +484,7 @@ namespace Berzerk
                         if (textures[i].GetType() == typeof(Gold) && !((Gold)textures[i]).IsTaken)
                         {
                             ((Gold)textures[i]).IsTaken = true;
-                            Player.NrOfPowerUps++;
+                            Player.PlayerGold += ((Gold)textures[i]).Amount;
                         }
                     }
                 }

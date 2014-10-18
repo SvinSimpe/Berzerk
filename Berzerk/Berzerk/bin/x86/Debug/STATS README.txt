@@ -7,6 +7,7 @@
 #3 Highscore	// Best distance
 #4 Modifier	// Current modifier value
 #5 XpLimit	// XP-roof of current lvl
+#6 PlayerGold	// Amount of gold
 
 
 ========================================|

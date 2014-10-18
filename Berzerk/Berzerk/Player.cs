@@ -19,7 +19,8 @@ namespace Berzerk
         private static float    m_modifier;         // Increases each level & adds to swing power
         private static int      m_currentDistance;  // Distance from each round
         private static int      m_xpLimit;          // XP-limit of current lvl
-        private static int      m_nrOfPowerUps;
+        private static int      m_nrOfPowerUps;     // Number of power ups, modifies XP and reset each round
+        private static int      m_playerGold;       // Amout of gold
 
         public static int XP
         {
@@ -62,6 +63,12 @@ namespace Berzerk
             get { return m_nrOfPowerUps; }
             set { m_nrOfPowerUps = value; }
         }
+
+        public static int PlayerGold
+        {
+            get { return m_playerGold; }
+            set { m_playerGold = value; }
+        }
         #endregion
 
         #region Methods
@@ -73,8 +80,10 @@ namespace Berzerk
             Highscore   = Convert.ToInt32( stats[2] );
             Modifier    = (float)Convert.ToDecimal( stats[3] );
             XpLimit     = Convert.ToInt32( stats[4] );
+            PlayerGold  = Convert.ToInt16( stats[5] );
 
             CurrentDistance = 0;
+            m_nrOfPowerUps  = 0;
         }
 
         public static string[] ReadFile()
@@ -94,7 +103,8 @@ namespace Berzerk
                                       Convert.ToString( LVL ),
                                       Convert.ToString( Highscore ),
                                       Convert.ToString( Modifier ),
-                                      Convert.ToString( XpLimit )
+                                      Convert.ToString( XpLimit ),
+                                      Convert.ToString( PlayerGold )
                                     };
                 System.IO.File.WriteAllLines("PlayerStats.txt", newStats);
             }
@@ -104,7 +114,8 @@ namespace Berzerk
                                       Convert.ToString( LVL ),
                                       savedStats[2],
                                       Convert.ToString( Modifier ),
-                                      Convert.ToString( XpLimit )
+                                      Convert.ToString( XpLimit ),
+                                      Convert.ToString( PlayerGold )
                                     };
                 System.IO.File.WriteAllLines("PlayerStats.txt", newStats);
             }        
