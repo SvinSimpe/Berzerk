@@ -62,8 +62,6 @@ namespace Berzerk
         float time = 0;
 
         Random rand;
-        Cloud m_cloud;
-        Vector2 m_cloudPos;
         StaticTexture[] textures;
         const int NUM_TEXTURES = 50;
 
@@ -220,18 +218,18 @@ namespace Berzerk
 
             if (projectile.Flying)
             {
-                m_back1.Update((int)projectile.XVelocity);
-                m_back2.Update((int)projectile.XVelocity);
-                m_back3.Update((int)projectile.XVelocity);
-                m_back4.Update((int)projectile.XVelocity);
-                m_back5.Update((int)projectile.XVelocity);
-                m_back6.Update((int)projectile.XVelocity);
-                m_back7.Update((int)projectile.XVelocity);
-                m_back8.Update((int)projectile.XVelocity);
+                m_back1.Update((int)projectile.Velocity.X);
+                m_back2.Update((int)projectile.Velocity.X);
+                m_back3.Update((int)projectile.Velocity.X);
+                m_back4.Update((int)projectile.Velocity.X);
+                m_back5.Update((int)projectile.Velocity.X);
+                m_back6.Update((int)projectile.Velocity.X);
+                m_back7.Update((int)projectile.Velocity.X);
+                m_back8.Update((int)projectile.Velocity.X);
                 if (m_plateau.rectangle.X + m_plateau.texture.Width > 0)
                 {
-                    m_plateau.Update((int)projectile.XVelocity);
-                    m_batterPos.X -= projectile.XVelocity;
+                    m_plateau.Update((int)projectile.Velocity.X);
+                    m_batterPos.X -= projectile.Velocity.X;
                 }
             }
 
@@ -244,7 +242,7 @@ namespace Berzerk
             {
                 CheckTexturePositions();
 
-                if (projectile.XVelocity > 0)
+                if (projectile.Velocity.X > 0)
                 {
                     if (time >= 1)
                     {
@@ -255,14 +253,14 @@ namespace Berzerk
                     for (int i = 0; i < NUM_TEXTURES; i++)
                     {
                         if (boom.m_isActive)
-                            boom.Update(gameTime, (int)projectile.XVelocity);
+                            boom.Update(gameTime, (int)projectile.Velocity.X);
 
                         if (textures[i].GetType() == typeof(Wasp))
-                            ((Wasp)textures[i]).Update(gameTime, (int)projectile.XVelocity);
+                            ((Wasp)textures[i]).Update(gameTime, (int)projectile.Velocity.X);
                         else if (textures[i].GetType() == typeof(Cloud))
-                            ((Cloud)textures[i]).Update(gameTime, (int)projectile.XVelocity);
+                            ((Cloud)textures[i]).Update(gameTime, (int)projectile.Velocity.X);
                         else
-                            textures[i].Update(gameTime, (int)projectile.XVelocity);
+                            textures[i].Update(gameTime, (int)projectile.Velocity.X);
                     }
 
                     if (boom.m_position.X + boom.m_texture.Width <= 0)
@@ -272,7 +270,7 @@ namespace Berzerk
                 }
                 /////////////////////////////////////////////////////
 
-                ApplyPhysics(projectile);
+                CollisionDetection(projectile);
             }
         }
 
@@ -462,7 +460,7 @@ namespace Berzerk
             }
         }
 
-        private void ApplyPhysics(Projectile projectile)
+        private void CollisionDetection(Projectile projectile)
         {
             if (projectile.Flying)
             {
