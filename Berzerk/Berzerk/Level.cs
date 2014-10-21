@@ -65,7 +65,7 @@ namespace Berzerk
         Cloud m_cloud;
         Vector2 m_cloudPos;
         StaticTexture[] textures;
-        const int NUM_TEXTURES = 40;
+        const int NUM_TEXTURES = 50;
 
 
         // Properties
@@ -176,6 +176,17 @@ namespace Berzerk
             textures[37] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[38] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
             textures[39] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+
+            textures[40] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[41] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[42] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[43] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[44] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[45] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[46] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[47] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[48] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
+            textures[49] = new Gold(new Vector2(m_graphics.Viewport.Width + waspText.Width, 300), content);
         }
 
         private void UpdateBackgrounds()

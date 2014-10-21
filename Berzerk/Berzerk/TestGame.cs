@@ -91,7 +91,10 @@ namespace Berzerk
             //========= PROJECTILE TEST =============
 
             //========= LOAD SOUNDS =============
-           // SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
+            //SoundEngine.AddSoundEffect(content.Load<SoundEffect>("bee"), "bee", 0.1f);
+            SoundEngine.AddSoundEffect(content.Load<SoundEffect>("coin"), "coin", 0.1f);
+            //SoundEngine.AddSong(content.Load<Song>("theme"), "theme");
+            //SoundEngine.PlaySong("theme");
             //========= LOAD SOUNDS =============
 
             //========= PLAYER =============
