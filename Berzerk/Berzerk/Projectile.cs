@@ -16,8 +16,7 @@ namespace Berzerk
         private float       m_angle;    // The inital angle of the projectile
         private float       m_speed;
         private float       m_xPosition;    // Speed of scrolling backgrounds
-        private float       m_xVelocity;
-        private float       m_yVelocity;
+        private Vector2     m_velocity;
         private float       m_time;     // The lifetime of the projectiles, increments each loop
         private bool        m_flying;   // True when airborne
         private bool        m_landed;
@@ -42,22 +41,16 @@ namespace Berzerk
             set { m_speed = value; }
         }
 
-        public float XVelocity
+        public Vector2 Velocity
         {
-            get { return m_xVelocity; }
-            set { m_xVelocity = value; }
+            get { return m_velocity; }
+            set { m_velocity = value; }
         }
 
         public float XPosition
         {
             get { return m_xPosition; }
             set { m_xPosition = value; }
-        }
-
-        public float YVelocity
-        {
-            get { return m_yVelocity; }
-            set { m_yVelocity = value; }
         }
 
         public bool Flying
@@ -77,9 +70,6 @@ namespace Berzerk
             get { return m_angle; }
             set { m_angle = value; }
         }
-
-
-
         #endregion
         
         #region Methods
@@ -99,8 +89,8 @@ namespace Berzerk
         {
             m_angle = MathHelper.ToRadians(45);
             m_speed = 80.0f;
-            m_xVelocity = 0;
-            m_yVelocity = 0;
+            m_velocity.X = 0;
+            m_velocity.Y = 0;
             m_time      = 0.0f;
             m_flying    = false;
             m_landed    = false;
@@ -111,8 +101,8 @@ namespace Berzerk
 
         public void Fire()
         {
-            m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
-            m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
+            m_velocity.X = (float)Math.Cos(m_angle) * m_speed;
+            m_velocity.Y = (float)Math.Sin(m_angle) * m_speed;
             m_flying    = true;
         }
 
@@ -128,8 +118,8 @@ namespace Berzerk
             else
             {
                 m_speed *= (float)0.85;
-                m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
-                m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
+                m_velocity.X = (float)Math.Cos(m_angle) * m_speed;
+                m_velocity.Y = (float)Math.Sin(m_angle) * m_speed;
                 m_time = 0.0f;
 
                 //TEST
@@ -139,16 +129,16 @@ namespace Berzerk
 
         public void ApplyWaspForce()
         {
-            m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
-            m_yVelocity = (float)Math.Sin(m_angle) * m_speed * (float)0.6;
+            m_velocity.X = (float)Math.Cos(m_angle) * m_speed;
+            m_velocity.Y = (float)Math.Sin(m_angle) * m_speed * (float)0.6;
             m_time = 0.0f;
         }
 
         public void ApplySlimeForce()
         {
             m_speed     /= (float)3;
-            m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
-            m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
+            m_velocity.X = (float)Math.Cos(m_angle) * m_speed;
+            m_velocity.Y = (float)Math.Sin(m_angle) * m_speed;
             m_time      = 0.0f;
         }
 
@@ -156,8 +146,8 @@ namespace Berzerk
         {
             m_angle     = 45;
             m_speed     += 50;
-            m_xVelocity = (float)Math.Cos(m_angle) * m_speed;
-            m_yVelocity = (float)Math.Sin(m_angle) * m_speed;
+            m_velocity.X = (float)Math.Cos(m_angle) * m_speed;
+            m_velocity.Y = (float)Math.Sin(m_angle) * m_speed;
             m_time      = 0.0f;
 
             //TEST
@@ -173,8 +163,8 @@ namespace Berzerk
                 millisecs /= 10000;
                 m_time += millisecs;
 
-                m_xPosition += m_xVelocity;
-                m_position.Y -= ( m_yVelocity ) - (gravity * m_time * m_time );
+                m_xPosition += m_velocity.X;
+                m_position.Y -= ( m_velocity.Y ) - (gravity * m_time * m_time );
             }                
         }
 
